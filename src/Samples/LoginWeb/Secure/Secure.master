@@ -1,5 +1,5 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Secure.master.cs" Inherits="_Default"
- MasterPageFile="~/Default.master" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" Inherits="_Default"
+ MasterPageFile="~/Default.master" Codebehind="Secure.master.cs" %>
 
 <asp:Content ID="menuContent" runat="server" ContentPlaceHolderID="menuContentPlaceHolder">
   <div id="menu">

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Secure/Secure.master" AutoEventWireup="true" CodeFile="UpdateStatus.aspx.cs" Inherits="_UpdateStatus" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Secure/Secure.master" AutoEventWireup="true" Inherits="_UpdateStatus" Codebehind="UpdateStatus.aspx.cs" %>
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
 

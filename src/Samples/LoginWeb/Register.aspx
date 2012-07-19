@@ -1,5 +1,5 @@
-<%@ Page Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="Register.aspx.cs"
-  Inherits="Register" %>
+<%@ Page Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true"
+  Inherits="Register" Codebehind="Register.aspx.cs" %>
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
     <h2>Sign up for a new account</h2>
