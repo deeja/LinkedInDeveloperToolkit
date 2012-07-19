@@ -10,6 +10,6 @@
 
 using System.Web.UI;
 
-public partial class _Default : MasterPage
+public partial class Default : MasterPage
 {
 }

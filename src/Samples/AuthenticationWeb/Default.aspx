@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" Inherits="Authentication.Web._Default" Codebehind="Default.aspx.cs" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" Inherits="Authentication.Web.Default" Codebehind="Default.aspx.cs" %>
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
 

@@ -10,7 +10,7 @@
 namespace Authentication.Web {
     
     
-    public partial class _Default {
+    public partial class Default {
         
         /// <summary>
         /// loginStatusMultiView control.
