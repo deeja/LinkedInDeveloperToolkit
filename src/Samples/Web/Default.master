@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Default.master.cs" Inherits="_Default" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>LinkedIn Developer Toolkit Samples</title>
+    <link rel="Stylesheet" href="assets/style/core.css" type="text/css" />
+</head>
+<body>
+    <div id="header">
+      <h1>LinkedIn Developer Toolkit Samples</h1>
+    </div>
+    <div id="menu">
+      <ul>
+        <li><a href="Default.aspx">Overview</a></li>
+        <li class="seperator"></li>
+        <li><a href="Profile.aspx">Your profile</a></li>
+        <li class="seperator"></li>
+        <li><a href="Connections.aspx">Your connections</a></li>
+        <li class="seperator"></li>
+        <li><a href="UpdateStatus.aspx">Update status</a></li>
+      </ul>
+    </div>
+    <div id="content">
+      <form id="aspNet" runat="server">
+        <asp:ContentPlaceHolder id="bodyContentPlaceHolder" runat="server">
+        
+        </asp:ContentPlaceHolder>
+      </form>
+    </div>
+</body>
+</html>

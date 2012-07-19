@@ -1,0 +1,5 @@
+﻿<?xml version="1.0"?>
+<appSettings>
+  <add key="LinkedInConsumerKey" value="[Insert your LinkedIn Consumer Key]"/>
+  <add key="LinkedInConsumerSecret" value="[Insert your LinkedIn Consumer Secret]"/>
+</appSettings>

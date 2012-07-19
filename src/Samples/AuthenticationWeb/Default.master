@@ -1,0 +1,22 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Default.master.cs" Inherits="Authentication.Web._Default" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>LinkedIn Developer Toolkit Authentication Sample</title>
+    <link rel="Stylesheet" href="assets/style/core.css" type="text/css" />
+</head>
+<body>
+    <div id="header">
+      <h1>LinkedIn Developer Toolkit Authentication Sample</h1>
+    </div>
+    <div id="content">
+      <form id="aspNet" runat="server">
+        <asp:ContentPlaceHolder id="bodyContentPlaceHolder" runat="server">
+        
+        </asp:ContentPlaceHolder>
+      </form>
+    </div>
+</body>
+</html>

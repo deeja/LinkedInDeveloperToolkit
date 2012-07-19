@@ -1,0 +1,90 @@
+﻿* {
+  padding: 0px;
+  margin: 0px;
+}
+h1, h2, p {
+  font-family: Arial;
+}
+body {
+  font-family: Arial;
+  font-size: 13px;
+  padding: 0px;
+  margin: 0px;
+}
+h1 {
+  font-size: 21px;
+  padding: 30px 10px 10px
+}
+h2 {
+  font-size: 15px;
+  padding: 10px 0px 5px
+}
+p {
+  padding: 5px 0px
+}
+a {
+  text-decoration: none;
+  color: #3185AF
+}
+a:hover {
+  text-decoration: underline;
+  color: #3185AF
+}
+.italic {
+  font-style: italic
+}
+#header {
+  height: 80px;
+  background: url('../img/header_bg.jpg') repeat-x 0px 0px;
+}
+#menu {
+  height: 25px;
+  background: url('../img/menu_bg.jpg') repeat-x 0px 0px;
+  overflow: hidden
+}
+#menu ul {
+  list-style: none;
+}
+#menu li {
+  float: left;
+  height: 25px;
+  text-align: center
+}
+#menu li.seperator {
+  width: 2px;
+  background: url('../img/menu_seperator.jpg') no-repeat;
+}
+#menu a {  
+  height: 25px;
+  display: block;
+  background: url('../img/menu_bg.jpg') repeat-x 0px 0px;
+  white-space: nowrap;
+  padding: 3px 8px 0px
+}
+#menu a:hover {
+  background-position: 0px -25px;
+  text-decoration: none;
+}
+#content {
+  margin: 8px
+}
+#content ul {
+  list-style-type: disc;
+  padding: 5px 15px;
+  margin: 10px 0px 10px 5px
+}
+#content li {
+  margin-right: 10px
+}
+#content td {
+  padding: 1px 2px;
+}
+#content td.label {
+  vertical-align: top;
+}
+#content td.data {
+ font-weight: bold 
+}
+#content img {
+  border: 1px solid #000
+}

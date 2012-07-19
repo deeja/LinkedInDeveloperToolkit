@@ -1,0 +1,26 @@
+<asp:CreateUserWizard runat="server" InstructionTextStyle-CssClass="instruction" />
+
+<asp:GridView runat="server" CellPadding="4" ForeColor="#333333" GridLines="Vertical">
+    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+    <RowStyle BackColor="#EFF3FB" />
+    <EditRowStyle BackColor="#CCEEBB" ForeColor="Black" />
+    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+    <AlternatingRowStyle BackColor="White" />
+</asp:GridView>
+
+
+<%-- Default textbox appearance --%>
+<asp:TextBox runat="server" CssClass="txtBox" />
+
+<%-- Default button appearance --%>
+<asp:Button runat="server" CssClass="button"/>
+
+<%-- Default combobox appearance --%>
+<asp:DropDownList runat="server" CssClass="comboBox"/>
+
+<%-- Navigation button appearance --%>
+<asp:Button runat="server" CssClass="navButton" SkinID="NavButton" Width="120px" />
+<%-- Default action navigation button appearance --%>
+<asp:Button runat="server" CssClass="navButtonDefault" SkinID="NavButtonDefault" Width="120px" />

@@ -1,0 +1,20 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Secure.master.cs" Inherits="_Default"
+ MasterPageFile="~/Default.master" %>
+
+<asp:Content ID="menuContent" runat="server" ContentPlaceHolderID="menuContentPlaceHolder">
+  <div id="menu">
+    <ul>
+      <li><a href="../Default.aspx">Overview</a></li>
+      <li class="seperator"></li>
+      <li><a href="Profile.aspx">Your profile</a></li>
+      <li class="seperator"></li>
+      <li><a href="Connections.aspx">Your connections</a></li>
+      <li class="seperator"></li>
+      <li><a href="UpdateStatus.aspx">Update status</a></li>
+    </ul>
+  </div>
+</asp:Content>
+
+<asp:Content ID="bodyContent" runat="server" ContentPlaceHolderID="bodyContentPlaceHolder">
+  <asp:ContentPlaceHolder ID="bodyContentPlaceHolder" runat="server" />
+</asp:Content>
