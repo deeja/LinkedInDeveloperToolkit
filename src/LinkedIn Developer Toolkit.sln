@@ -10,8 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{F5C802DD-EA7E-4DE6-958B-B46B84391B0A}"
 	ProjectSection(SolutionItems) = preProject
 		License.txt = License.txt
-		LinkedIn Developer Toolkit.vsmdi = LinkedIn Developer Toolkit.vsmdi
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 		Readme.txt = Readme.txt
 	EndProjectSection
 EndProject
@@ -107,9 +105,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsForms", "Samples\WindowsForms\WindowsForms.csproj", "{55BFEB2B-1EED-4F15-874C-34CFD9F13341}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kerr.Credetials", "Kerr.Credetials", "{F65A9A28-FCAC-4A4C-BA84-460DE14A2268}"
-	ProjectSection(SolutionItems) = preProject
-		Shared Libraries\Kerr.Credentials\Kerr.Credentials.dll = Shared Libraries\Kerr.Credentials\Kerr.Credentials.dll
-	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "AuthenticationWeb", "Samples\AuthenticationWeb", "{D0D30137-D1F4-4E57-82AD-27B929D9F368}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -179,9 +174,6 @@ Global
 		SccProjectName7 = Samples/AuthenticationWeb
 		SccLocalPath7 = Samples\\AuthenticationWeb
 		SccProjectEnlistmentChoice7 = 2
-	EndGlobalSection
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = LinkedIn Developer Toolkit.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeAnalysis|.NET = CodeAnalysis|.NET
