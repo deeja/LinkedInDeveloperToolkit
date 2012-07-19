@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginWeb", "Samples\LoginWe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationWeb", "Samples\AuthenticationWeb\AuthenticationWeb.csproj", "{DD2B4B9F-3AAA-42BB-9142-03DF214415D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalTests", "Tests\Functional Tests\FunctionalTests.csproj", "{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CodeAnalysis|.NET = CodeAnalysis|.NET
@@ -153,6 +155,24 @@ Global
 		{DD2B4B9F-3AAA-42BB-9142-03DF214415D4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{DD2B4B9F-3AAA-42BB-9142-03DF214415D4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DD2B4B9F-3AAA-42BB-9142-03DF214415D4}.Release|x86.ActiveCfg = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.CodeAnalysis|.NET.ActiveCfg = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.CodeAnalysis|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.CodeAnalysis|Mixed Platforms.Build.0 = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.CodeAnalysis|x86.ActiveCfg = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|.NET.ActiveCfg = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,6 +180,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3255FDD1-0449-4D43-B265-E7D133542C76} = {DF923F5F-55C9-4EC5-845E-205E6CD6D0CB}
 		{D1085273-8228-42CC-87F3-B22819893F57} = {DF923F5F-55C9-4EC5-845E-205E6CD6D0CB}
+		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE} = {3255FDD1-0449-4D43-B265-E7D133542C76}
 		{4E4C3E30-A7B4-4E85-9298-48111DF255E7} = {4B9083D4-E8A3-4E6B-BDC6-C2FA006123F4}
 		{55BFEB2B-1EED-4F15-874C-34CFD9F13341} = {FCF33ED2-0B1C-46A2-9070-A6C4EEC89E97}
 		{ECD73A85-041A-4CD8-ABC4-E4DF5982B0E2} = {FCF33ED2-0B1C-46A2-9070-A6C4EEC89E97}

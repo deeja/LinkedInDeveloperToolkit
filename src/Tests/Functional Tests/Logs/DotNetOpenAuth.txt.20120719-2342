@@ -1,0 +1,51 @@
+2012-07-19 23:42:42,796 [11] INFO  DotNetOpenAuth [(null)] - DotNetOpenAuth.Core, Version=4.1.0.12182, Culture=neutral, PublicKeyToken=2780ccd10d57b246 (official)
+2012-07-19 23:42:42,836 [11] INFO  DotNetOpenAuth [(null)] - Reporting will use isolated storage with scope: User, Domain, Assembly
+2012-07-19 23:42:42,854 [11] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Scanning incoming request for messages: http://localhost:54375/default.aspx
+2012-07-19 23:42:42,901 [11] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send UnauthorizedTokenRequest (1.0.1) message.
+2012-07-19 23:42:42,902 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement applied to message.
+2012-07-19 23:42:42,902 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement applied to message.
+2012-07-19 23:42:42,903 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement applied to message.
+2012-07-19 23:42:42,904 [11] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Applying secrets to message to prepare for signing or signature verification.
+2012-07-19 23:42:42,905 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Signing UnauthorizedTokenRequest message using HMAC-SHA1.
+2012-07-19 23:42:42,916 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Constructed signature base string: GET&https%3A%2F%2Fapi.linkedin.com%2Fuas%2Foauth%2FrequestToken&oauth_callback%3Dhttp%253A%252F%252Flocalhost%253A1898%252FTestWeb%252FDefault.aspx%26oauth_consumer_key%3D6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY%26oauth_nonce%3DzDyeLLtR%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1342737762%26oauth_version%3D1.0
+2012-07-19 23:42:42,916 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain applied to message.
+2012-07-19 23:42:42,923 [11] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing UnauthorizedTokenRequest (1.0.1) message for https://api.linkedin.com/uas/oauth/requestToken: 
+	oauth_callback: http://localhost:1898/TestWeb/Default.aspx
+	oauth_consumer_key: 6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY
+	oauth_nonce: zDyeLLtR
+	oauth_signature_method: HMAC-SHA1
+	oauth_signature: 2tY8PwkwDiy1msMmPsWy4hE5zVo=
+	oauth_version: 1.0
+	oauth_timestamp: 1342737762
+
+2012-07-19 23:42:42,924 [11] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Sending UnauthorizedTokenRequest request.
+2012-07-19 23:42:42,946 [11] DEBUG DotNetOpenAuth.Http [(null)] - HTTP GET https://api.linkedin.com/uas/oauth/requestToken
+2012-07-19 23:42:43,820 [11] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Received UnauthorizedTokenResponse response.
+2012-07-19 23:42:43,822 [11] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Processing incoming UnauthorizedTokenResponse (1.0.1) message:
+	oauth_token: 11c15572-87dc-4118-9223-95a5acf23297
+	oauth_token_secret: be5bdb61-b21e-47b3-afb6-de422223f0af
+	oauth_callback_confirmed: true
+	xoauth_request_auth_url: https://api.linkedin.com/uas/oauth/authorize
+	oauth_expires_in: 599
+
+2012-07-19 23:42:43,825 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain did not apply to message.
+2012-07-19 23:42:43,826 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement did not apply to message.
+2012-07-19 23:42:43,827 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement did not apply to message.
+2012-07-19 23:42:43,827 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement did not apply to message.
+2012-07-19 23:42:43,828 [11] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - After binding element processing, the received UnauthorizedTokenResponse (1.0.1) message is: 
+	oauth_token: 11c15572-87dc-4118-9223-95a5acf23297
+	oauth_token_secret: be5bdb61-b21e-47b3-afb6-de422223f0af
+	oauth_callback_confirmed: true
+	xoauth_request_auth_url: https://api.linkedin.com/uas/oauth/authorize
+	oauth_expires_in: 599
+
+2012-07-19 23:42:43,831 [11] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send UserAuthorizationRequest (1.0.1) message.
+2012-07-19 23:42:43,831 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement did not apply to message.
+2012-07-19 23:42:43,831 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement did not apply to message.
+2012-07-19 23:42:43,831 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement did not apply to message.
+2012-07-19 23:42:43,831 [11] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain did not apply to message.
+2012-07-19 23:42:43,831 [11] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing UserAuthorizationRequest (1.0.1) message for https://api.linkedin.com/uas/oauth/authorize: 
+	oauth_token: 11c15572-87dc-4118-9223-95a5acf23297
+
+2012-07-19 23:42:43,831 [11] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Sending message: UserAuthorizationRequest
+2012-07-19 23:42:43,837 [11] DEBUG DotNetOpenAuth.Http [(null)] - Redirecting to https://api.linkedin.com/uas/oauth/authorize?oauth_token=11c15572-87dc-4118-9223-95a5acf23297

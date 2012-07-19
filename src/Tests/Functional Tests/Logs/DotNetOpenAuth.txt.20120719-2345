@@ -1,0 +1,19 @@
+2012-07-19 23:45:45,894 [15] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Scanning incoming request for messages: http://localhost:54375/CommentOnNetworkUpdate.aspx
+2012-07-19 23:45:55,851 [7] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Scanning incoming request for messages: http://localhost:54375/default.aspx
+2012-07-19 23:45:55,851 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send AccessProtectedResourceRequest (1.0.1) message.
+2012-07-19 23:45:55,851 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement applied to message.
+2012-07-19 23:45:55,851 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement applied to message.
+2012-07-19 23:45:55,851 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement applied to message.
+2012-07-19 23:45:55,851 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Applying secrets to message to prepare for signing or signature verification.
+2012-07-19 23:45:55,851 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Signing AccessProtectedResourceRequest message using HMAC-SHA1.
+2012-07-19 23:45:55,852 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Constructed signature base string: GET&http%3A%2F%2Fapi.linkedin.com%2Fv1%2Fpeople%2F~&oauth_consumer_key%3D6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY%26oauth_nonce%3DvEZv2u3s%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1342737955%26oauth_token%3Dee3c85f6-2f75-40e2-8bbc-8dad36562eb4%26oauth_version%3D1.0
+2012-07-19 23:45:55,852 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain applied to message.
+2012-07-19 23:45:55,852 [7] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing AccessProtectedResourceRequest (1.0.1) message for http://api.linkedin.com/v1/people/~: 
+	oauth_token: ee3c85f6-2f75-40e2-8bbc-8dad36562eb4
+	oauth_consumer_key: 6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY
+	oauth_nonce: vEZv2u3s
+	oauth_signature_method: HMAC-SHA1
+	oauth_signature: vN4ZLggA48MiuiyopNLi4h0ybRQ=
+	oauth_version: 1.0
+	oauth_timestamp: 1342737955
+

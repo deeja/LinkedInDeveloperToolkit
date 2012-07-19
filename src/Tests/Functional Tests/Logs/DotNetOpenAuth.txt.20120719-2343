@@ -1,0 +1,154 @@
+2012-07-19 23:43:10,915 [8] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Scanning incoming request for messages: http://localhost:54375/default.aspx
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send UnauthorizedTokenRequest (1.0.1) message.
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement applied to message.
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement applied to message.
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement applied to message.
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Applying secrets to message to prepare for signing or signature verification.
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Signing UnauthorizedTokenRequest message using HMAC-SHA1.
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Constructed signature base string: GET&https%3A%2F%2Fapi.linkedin.com%2Fuas%2Foauth%2FrequestToken&oauth_callback%3Dhttp%253A%252F%252Flocalhost%253A1898%252FTestWeb%252FDefault.aspx%26oauth_consumer_key%3D6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY%26oauth_nonce%3D7a1OZITr%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1342737790%26oauth_version%3D1.0
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain applied to message.
+2012-07-19 23:43:10,924 [8] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing UnauthorizedTokenRequest (1.0.1) message for https://api.linkedin.com/uas/oauth/requestToken: 
+	oauth_callback: http://localhost:1898/TestWeb/Default.aspx
+	oauth_consumer_key: 6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY
+	oauth_nonce: 7a1OZITr
+	oauth_signature_method: HMAC-SHA1
+	oauth_signature: f1ujJM3F7DYYKAu69R+tyTIhMqQ=
+	oauth_version: 1.0
+	oauth_timestamp: 1342737790
+
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Sending UnauthorizedTokenRequest request.
+2012-07-19 23:43:10,924 [8] DEBUG DotNetOpenAuth.Http [(null)] - HTTP GET https://api.linkedin.com/uas/oauth/requestToken
+2012-07-19 23:43:11,111 [8] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Received UnauthorizedTokenResponse response.
+2012-07-19 23:43:11,111 [8] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Processing incoming UnauthorizedTokenResponse (1.0.1) message:
+	oauth_token: b246fb4a-4f4e-409f-a36c-6e7eaf3d3806
+	oauth_token_secret: c3de5870-5bf1-48c3-8210-0e3fdfd5549d
+	oauth_callback_confirmed: true
+	xoauth_request_auth_url: https://api.linkedin.com/uas/oauth/authorize
+	oauth_expires_in: 599
+
+2012-07-19 23:43:11,111 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain did not apply to message.
+2012-07-19 23:43:11,111 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement did not apply to message.
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement did not apply to message.
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement did not apply to message.
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - After binding element processing, the received UnauthorizedTokenResponse (1.0.1) message is: 
+	oauth_token: b246fb4a-4f4e-409f-a36c-6e7eaf3d3806
+	oauth_token_secret: c3de5870-5bf1-48c3-8210-0e3fdfd5549d
+	oauth_callback_confirmed: true
+	xoauth_request_auth_url: https://api.linkedin.com/uas/oauth/authorize
+	oauth_expires_in: 599
+
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send UserAuthorizationRequest (1.0.1) message.
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement did not apply to message.
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement did not apply to message.
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement did not apply to message.
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain did not apply to message.
+2012-07-19 23:43:11,112 [8] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing UserAuthorizationRequest (1.0.1) message for https://api.linkedin.com/uas/oauth/authorize: 
+	oauth_token: b246fb4a-4f4e-409f-a36c-6e7eaf3d3806
+
+2012-07-19 23:43:11,112 [8] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Sending message: UserAuthorizationRequest
+2012-07-19 23:43:11,113 [8] DEBUG DotNetOpenAuth.Http [(null)] - Redirecting to https://api.linkedin.com/uas/oauth/authorize?oauth_token=b246fb4a-4f4e-409f-a36c-6e7eaf3d3806
+2012-07-19 23:43:42,547 [7] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Scanning incoming request for messages: http://localhost:54375/Default.aspx?oauth_token=b246fb4a-4f4e-409f-a36c-6e7eaf3d3806&oauth_verifier=00240
+2012-07-19 23:43:42,548 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Incoming request received: UserAuthorizationResponse
+2012-07-19 23:43:42,548 [7] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Processing incoming UserAuthorizationResponse (1.0.1) message:
+	oauth_verifier: 00240
+	oauth_token: b246fb4a-4f4e-409f-a36c-6e7eaf3d3806
+
+2012-07-19 23:43:42,548 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain did not apply to message.
+2012-07-19 23:43:42,548 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement did not apply to message.
+2012-07-19 23:43:42,548 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement did not apply to message.
+2012-07-19 23:43:42,548 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement did not apply to message.
+2012-07-19 23:43:42,548 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - After binding element processing, the received UserAuthorizationResponse (1.0.1) message is: 
+	oauth_verifier: 00240
+	oauth_token: b246fb4a-4f4e-409f-a36c-6e7eaf3d3806
+
+2012-07-19 23:43:42,549 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send AuthorizedTokenRequest (1.0.1) message.
+2012-07-19 23:43:42,549 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement applied to message.
+2012-07-19 23:43:42,549 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement applied to message.
+2012-07-19 23:43:42,549 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement applied to message.
+2012-07-19 23:43:42,549 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Applying secrets to message to prepare for signing or signature verification.
+2012-07-19 23:43:42,549 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Signing AuthorizedTokenRequest message using HMAC-SHA1.
+2012-07-19 23:43:42,550 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Constructed signature base string: GET&https%3A%2F%2Fapi.linkedin.com%2Fuas%2Foauth%2FaccessToken&oauth_consumer_key%3D6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY%26oauth_nonce%3DSyseNFVx%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1342737822%26oauth_token%3Db246fb4a-4f4e-409f-a36c-6e7eaf3d3806%26oauth_verifier%3D00240%26oauth_version%3D1.0
+2012-07-19 23:43:42,550 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain applied to message.
+2012-07-19 23:43:42,551 [7] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing AuthorizedTokenRequest (1.0.1) message for https://api.linkedin.com/uas/oauth/accessToken: 
+	oauth_verifier: 00240
+	oauth_token: b246fb4a-4f4e-409f-a36c-6e7eaf3d3806
+	oauth_consumer_key: 6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY
+	oauth_nonce: SyseNFVx
+	oauth_signature_method: HMAC-SHA1
+	oauth_signature: rgmNrorxiHjoClxqJaiMyuarYh4=
+	oauth_version: 1.0
+	oauth_timestamp: 1342737822
+
+2012-07-19 23:43:42,551 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Sending AuthorizedTokenRequest request.
+2012-07-19 23:43:42,551 [7] DEBUG DotNetOpenAuth.Http [(null)] - HTTP GET https://api.linkedin.com/uas/oauth/accessToken
+2012-07-19 23:43:42,746 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Received AuthorizedTokenResponse response.
+2012-07-19 23:43:42,746 [7] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Processing incoming AuthorizedTokenResponse (1.0.1) message:
+	oauth_token: ee3c85f6-2f75-40e2-8bbc-8dad36562eb4
+	oauth_token_secret: 2a6f4021-035e-4dd9-ac57-7c517d379543
+	oauth_expires_in: 85480
+	oauth_authorization_expires_in: 85480
+
+2012-07-19 23:43:42,746 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain did not apply to message.
+2012-07-19 23:43:42,746 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement did not apply to message.
+2012-07-19 23:43:42,747 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement did not apply to message.
+2012-07-19 23:43:42,747 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement did not apply to message.
+2012-07-19 23:43:42,747 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - After binding element processing, the received AuthorizedTokenResponse (1.0.1) message is: 
+	oauth_token: ee3c85f6-2f75-40e2-8bbc-8dad36562eb4
+	oauth_token_secret: 2a6f4021-035e-4dd9-ac57-7c517d379543
+	oauth_expires_in: 85480
+	oauth_authorization_expires_in: 85480
+
+2012-07-19 23:43:42,761 [13] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Scanning incoming request for messages: http://localhost:54375/Default.aspx
+2012-07-19 23:43:42,779 [13] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send AccessProtectedResourceRequest (1.0.1) message.
+2012-07-19 23:43:42,779 [13] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement applied to message.
+2012-07-19 23:43:42,779 [13] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement applied to message.
+2012-07-19 23:43:42,779 [13] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement applied to message.
+2012-07-19 23:43:42,779 [13] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Applying secrets to message to prepare for signing or signature verification.
+2012-07-19 23:43:42,780 [13] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Signing AccessProtectedResourceRequest message using HMAC-SHA1.
+2012-07-19 23:43:42,781 [13] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Constructed signature base string: GET&http%3A%2F%2Fapi.linkedin.com%2Fv1%2Fpeople%2F~&oauth_consumer_key%3D6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY%26oauth_nonce%3DkBEEfI41%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1342737822%26oauth_token%3Dee3c85f6-2f75-40e2-8bbc-8dad36562eb4%26oauth_version%3D1.0
+2012-07-19 23:43:42,781 [13] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain applied to message.
+2012-07-19 23:43:42,781 [13] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing AccessProtectedResourceRequest (1.0.1) message for http://api.linkedin.com/v1/people/~: 
+	oauth_token: ee3c85f6-2f75-40e2-8bbc-8dad36562eb4
+	oauth_consumer_key: 6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY
+	oauth_nonce: kBEEfI41
+	oauth_signature_method: HMAC-SHA1
+	oauth_signature: cSauO/4j9pjv39VU+LUyiXsSBlo=
+	oauth_version: 1.0
+	oauth_timestamp: 1342737822
+
+2012-07-19 23:43:48,811 [9] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Scanning incoming request for messages: http://localhost:54375/GetProfileByMemberId.aspx
+2012-07-19 23:43:48,821 [9] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send AccessProtectedResourceRequest (1.0.1) message.
+2012-07-19 23:43:48,822 [9] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement applied to message.
+2012-07-19 23:43:48,822 [9] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement applied to message.
+2012-07-19 23:43:48,822 [9] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement applied to message.
+2012-07-19 23:43:48,822 [9] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Applying secrets to message to prepare for signing or signature verification.
+2012-07-19 23:43:48,822 [9] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Signing AccessProtectedResourceRequest message using HMAC-SHA1.
+2012-07-19 23:43:48,822 [9] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Constructed signature base string: GET&http%3A%2F%2Fapi.linkedin.com%2Fv1%2Fpeople%2Fid%3DfCDs20e9AI%3A%28connections%2Cfirst-name%2Cheadline%2Chonors%2Clast-name%2Cnum-recommenders%2Cid%2Cpicture-url%2Cpublic-profile-url%2Csite-standard-profile-request%3A%28url%29%2Cspecialties%2Csummary%2Csite-public-profile-request%3A%28url%29%2Capi-public-profile-request%3A%28url%29%2Clocation%3A%28country%3A%28code%29%2Cname%29%2Capi-standard-profile-request%3A%28headers%2Curl%29%2Cpositions%3A%28company%3A%28name%29%2Cend-date%2Cid%2Cis-current%2Cstart-date%2Csummary%2Ctitle%29%2Ceducations%3A%28activities%2Cdegree%2Cend-date%2Cfield-of-study%2Cid%2Cschool-name%2Cstart-date%29%29&oauth_consumer_key%3D6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY%26oauth_nonce%3D7Lc5bUCn%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1342737828%26oauth_token%3Dee3c85f6-2f75-40e2-8bbc-8dad36562eb4%26oauth_version%3D1.0
+2012-07-19 23:43:48,822 [9] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain applied to message.
+2012-07-19 23:43:48,822 [9] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing AccessProtectedResourceRequest (1.0.1) message for http://api.linkedin.com/v1/people/id=fCDs20e9AI:(connections,first-name,headline,honors,last-name,num-recommenders,id,picture-url,public-profile-url,site-standard-profile-request:(url),specialties,summary,site-public-profile-request:(url),api-public-profile-request:(url),location:(country:(code),name),api-standard-profile-request:(headers,url),positions:(company:(name),end-date,id,is-current,start-date,summary,title),educations:(activities,degree,end-date,field-of-study,id,school-name,start-date)): 
+	oauth_token: ee3c85f6-2f75-40e2-8bbc-8dad36562eb4
+	oauth_consumer_key: 6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY
+	oauth_nonce: 7Lc5bUCn
+	oauth_signature_method: HMAC-SHA1
+	oauth_signature: Cgmel8DioXB35sDQRWY0j+9+0XI=
+	oauth_version: 1.0
+	oauth_timestamp: 1342737828
+
+2012-07-19 23:43:52,556 [7] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Scanning incoming request for messages: http://localhost:54375/GetCurrentUserFull.aspx
+2012-07-19 23:43:52,559 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Preparing to send AccessProtectedResourceRequest (1.0.1) message.
+2012-07-19 23:43:52,559 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.OAuthHttpMethodBindingElement applied to message.
+2012-07-19 23:43:52,559 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardReplayProtectionBindingElement applied to message.
+2012-07-19 23:43:52,559 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.Messaging.Bindings.StandardExpirationBindingElement applied to message.
+2012-07-19 23:43:52,559 [7] DEBUG DotNetOpenAuth.Messaging.Channel [(null)] - Applying secrets to message to prepare for signing or signature verification.
+2012-07-19 23:43:52,559 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Signing AccessProtectedResourceRequest message using HMAC-SHA1.
+2012-07-19 23:43:52,560 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Constructed signature base string: GET&http%3A%2F%2Fapi.linkedin.com%2Fv1%2Fpeople%2F~%3A%28associations%2Cconnections%2Ccurrent-share%2Ccurrent-status%2Ccurrent-status-timestamp%2Cdate-of-birth%2Cdistance%2Cfirst-name%2Cheadline%2Chonors%2Cim-accounts%2Clast-name%2Cmain-address%2Cnum-connections%2Cnum-connections-capped%2Cnum-recommenders%2Cid%2Cphone-numbers%2Cpicture-url%2Cproposal-comments%2Cpublic-profile-url%2Csite-standard-profile-request%3A%28url%29%2Cspecialties%2Csummary%2Cthree-current-positions%2Cthree-past-positions%2Ctwitter-accounts%2Clocation%3A%28country%3A%28code%29%2Cname%29%2Crelation-to-viewer%3A%28distance%2Cnum-related-connections%2Crelated-connections%29%2Capi-standard-profile-request%3A%28headers%2Curl%29%2Cpositions%3A%28company%3A%28name%29%2Cend-date%2Cid%2Cis-current%2Cstart-date%2Csummary%2Ctitle%29%2Ceducations%3A%28activities%2Cdegree%2Cend-date%2Cfield-of-study%2Cid%2Cschool-name%2Cstart-date%29%2Crecommendations-received%3A%28id%2Crecommendation-type%2Crecommender%29%29&oauth_consumer_key%3D6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY%26oauth_nonce%3DFbNk32wM%26oauth_signature_method%3DHMAC-SHA1%26oauth_timestamp%3D1342737832%26oauth_token%3Dee3c85f6-2f75-40e2-8bbc-8dad36562eb4%26oauth_version%3D1.0
+2012-07-19 23:43:52,560 [7] DEBUG DotNetOpenAuth.Messaging.Bindings [(null)] - Binding element DotNetOpenAuth.OAuth.ChannelElements.SigningBindingElementChain applied to message.
+2012-07-19 23:43:52,560 [7] INFO  DotNetOpenAuth.Messaging.Channel [(null)] - Prepared outgoing AccessProtectedResourceRequest (1.0.1) message for http://api.linkedin.com/v1/people/~:(associations,connections,current-share,current-status,current-status-timestamp,date-of-birth,distance,first-name,headline,honors,im-accounts,last-name,main-address,num-connections,num-connections-capped,num-recommenders,id,phone-numbers,picture-url,proposal-comments,public-profile-url,site-standard-profile-request:(url),specialties,summary,three-current-positions,three-past-positions,twitter-accounts,location:(country:(code),name),relation-to-viewer:(distance,num-related-connections,related-connections),api-standard-profile-request:(headers,url),positions:(company:(name),end-date,id,is-current,start-date,summary,title),educations:(activities,degree,end-date,field-of-study,id,school-name,start-date),recommendations-received:(id,recommendation-type,recommender)): 
+	oauth_token: ee3c85f6-2f75-40e2-8bbc-8dad36562eb4
+	oauth_consumer_key: 6phVM50XEGlL93ZB_4eJ3uVGrJL5x-rlxPRhMxHLLMR34Y2dqbyZOt4dP52ydpuY
+	oauth_nonce: FbNk32wM
+	oauth_signature_method: HMAC-SHA1
+	oauth_signature: v3cDmf+Nw/HeuZyRxq8Mn4Ojyjw=
+	oauth_version: 1.0
+	oauth_timestamp: 1342737832
+
