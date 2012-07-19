@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="Profile.aspx.cs" Inherits="_Profile" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" Inherits="_Profile" Codebehind="Profile.aspx.cs" %>
 
 <asp:Content ID="bodyContent" ContentPlaceHolderID="bodyContentPlaceHolder" runat="Server">
 
