@@ -7,12 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functional Tests", "Functio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4B9083D4-E8A3-4E6B-BDC6-C2FA006123F4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{F5C802DD-EA7E-4DE6-958B-B46B84391B0A}"
-	ProjectSection(SolutionItems) = preProject
-		License.txt = License.txt
-		Readme.txt = Readme.txt
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{FCF33ED2-0B1C-46A2-9070-A6C4EEC89E97}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Unit Tests", "Unit Tests", "{D1085273-8228-42CC-87F3-B22819893F57}"
