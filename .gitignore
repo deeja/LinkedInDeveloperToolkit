@@ -1,6 +1,12 @@
 # Custom Excludes
 packages/
 
+#############
+## MS Sql
+#############
+
+*.mdf
+*.ldf
 
 #################
 ## Eclipse

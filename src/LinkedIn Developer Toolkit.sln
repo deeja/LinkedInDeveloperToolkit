@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DF923F5F-55C9-4EC5-845E-205E6CD6D0CB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functional Tests", "Functional Tests", "{3255FDD1-0449-4D43-B265-E7D133542C76}"
@@ -24,6 +24,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthenticationWeb", "Samples\AuthenticationWeb\AuthenticationWeb.csproj", "{DD2B4B9F-3AAA-42BB-9142-03DF214415D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionalTests", "Tests\Functional Tests\FunctionalTests.csproj", "{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcSample", "MvcSample\MvcSample.csproj", "{D5266644-C066-483F-8E06-9B296114E656}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3B07DBB2-6FB0-4C72-9B86-9088806C8F88}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -167,6 +174,24 @@ Global
 		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D32C7706-C8C0-4008-BA84-D32A8F01F7BE}.Release|x86.ActiveCfg = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.CodeAnalysis|.NET.ActiveCfg = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.CodeAnalysis|Any CPU.ActiveCfg = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.CodeAnalysis|Any CPU.Build.0 = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.CodeAnalysis|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.CodeAnalysis|Mixed Platforms.Build.0 = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.CodeAnalysis|x86.ActiveCfg = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Release|.NET.ActiveCfg = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D5266644-C066-483F-8E06-9B296114E656}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -180,6 +205,7 @@ Global
 		{ECD73A85-041A-4CD8-ABC4-E4DF5982B0E2} = {FCF33ED2-0B1C-46A2-9070-A6C4EEC89E97}
 		{6F65D5A5-D185-42A7-96CF-71816E50E2A1} = {FCF33ED2-0B1C-46A2-9070-A6C4EEC89E97}
 		{DD2B4B9F-3AAA-42BB-9142-03DF214415D4} = {FCF33ED2-0B1C-46A2-9070-A6C4EEC89E97}
+		{D5266644-C066-483F-8E06-9B296114E656} = {FCF33ED2-0B1C-46A2-9070-A6C4EEC89E97}
 		{89C6D66F-0859-4DB2-9784-5C78A97F5D82} = {D1085273-8228-42CC-87F3-B22819893F57}
 	EndGlobalSection
 EndGlobal
