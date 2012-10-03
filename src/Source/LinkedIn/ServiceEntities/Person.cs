@@ -34,6 +34,7 @@ namespace LinkedIn.ServiceEntities
     /// <summary>
     /// Gets or sets the identifier of the person.
     /// </summary>
+    /// <remarks>Requires <see cref="ProfileField.PersonId"/></remarks>
     [XmlElement("id")]
     public string Id
     {
@@ -62,8 +63,9 @@ namespace LinkedIn.ServiceEntities
     }
 
     /// <summary>
-    /// Gets the full name of the person.
+    /// Gets the full name of the person. 
     /// </summary>
+    /// <remarks>Requires fields <see cref="ProfileField.LastName"/> and <see cref="ProfileField.FirstName"/></remarks>
     public string Name
     {
       get
