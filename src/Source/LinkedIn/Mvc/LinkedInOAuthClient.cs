@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using DotNetOpenAuth.AspNet;
@@ -554,7 +555,7 @@ namespace LinkedIn.Mvc
                 throw new ArgumentException("apiRequest", Resources.InvalidUrlApiRequestMessage);
             }
 
-            Uri requestUri = null;
+            Uri requestUri;
             try
             {
                 requestUri = new Uri(apiRequest.Url);
@@ -1658,18 +1659,10 @@ namespace LinkedIn.Mvc
                     throw new ArgumentNullException("memberIds",
                                                     string.Format(Resources.NotNullMessageFormat, "memberIds"));
                 }
-                else
-                {
-                    memberIds = new List<string>();
-                }
+                memberIds = new List<string>();
             }
 
-            List<Recipient> recipients = new List<Recipient>();
-            foreach (string recipient in memberIds)
-            {
-                recipients.Add(new Recipient
-                                   {Path = string.Format(CultureInfo.InvariantCulture, "/people/{0}", recipient)});
-            }
+            List<Recipient> recipients = memberIds.Select(recipient => new Recipient {Path = string.Format(CultureInfo.InvariantCulture, "/people/{0}", recipient)}).ToList();
 
             if (includeCurrentUser)
             {
