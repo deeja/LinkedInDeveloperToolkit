@@ -562,7 +562,7 @@ namespace LinkedIn.Tests
 
     #region Constructor tests
     /// <summary>
-    /// A test for LinkedInService Constructor
+    /// A test for LinkedInOAuthClient Constructor
     ///</summary>
     [TestMethod()]
     public void LinkedInServiceConstructorTest()

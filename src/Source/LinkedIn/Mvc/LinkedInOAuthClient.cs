@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="LinkedInService.cs" company="Beemway">
+// <copyright file="LinkedInOAuthClient.cs" company="Beemway">
 //     Copyright (c) Beemway. All rights reserved.
 // </copyright>
 // <license>
@@ -31,9 +31,9 @@ namespace LinkedIn.Mvc
     /// <summary>
     /// A service to access the LinkedIn API's.
     /// </summary>
-    public class LinkedInService : OAuthClient
+    public class LinkedInOAuthClient : OAuthClient
     {
-        public LinkedInService(string consumerKey, string consumerSecret)
+        public LinkedInOAuthClient(string consumerKey, string consumerSecret)
             : base("linkedIn service", new DotNetOpenAuthWebConsumer(LinkedInServiceDescription, new InMemoryOAuthTokenManager(consumerKey, consumerSecret)))
         {
 

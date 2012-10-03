@@ -106,7 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Mvc\LinkedInService.cs" />
+    <Compile Include="Mvc\LinkedInOAuthClient.cs" />
     <Compile Include="ServiceEntities\RecommendationType.cs" />
     <Compile Include="WebOAuthAuthentication.cs" />
     <Compile Include="DesktopOAuthAuthorization.cs" />

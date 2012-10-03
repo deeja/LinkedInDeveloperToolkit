@@ -16,7 +16,7 @@ namespace MvcSample
             // you must update this site. For more information visit http://go.microsoft.com/fwlink/?LinkID=252166
 
 
-           OAuthWebSecurity.RegisterClient(new LinkedInService("jcgfxoohuqsq", "2978FlNQFDkCUs6g"), "LinkedIn", null);
+           OAuthWebSecurity.RegisterClient(new LinkedInOAuthClient("jcgfxoohuqsq", "2978FlNQFDkCUs6g"), "LinkedIn", null);
 
        //     OAuthWebSecurity.RegisterLinkedInClient("jcgfxoohuqsq", "2978FlNQFDkCUs6g", "Linked in OEM");
             OAuthWebSecurity.RegisterGoogleClient("Google");
