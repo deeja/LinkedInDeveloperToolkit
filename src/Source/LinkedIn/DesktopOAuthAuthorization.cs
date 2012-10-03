@@ -42,7 +42,7 @@ namespace LinkedIn
     /// <param name="tokenManager">The token manager.</param>
     /// <param name="accessToken">The access token.</param>
     public DesktopOAuthAuthorization(IConsumerTokenManager tokenManager, string accessToken)
-      : this(tokenManager, accessToken, LinkedInServiceDescription)
+      : this(tokenManager, accessToken, ServiceDescriptions.LinkedInServiceDescription)
     {
     }
 

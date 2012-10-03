@@ -34,24 +34,8 @@ namespace LinkedIn.Mvc
     public class LinkedInOAuthClient : OAuthClient
     {
         public LinkedInOAuthClient(string consumerKey, string consumerSecret)
-            : base("linkedIn service", new DotNetOpenAuthWebConsumer(LinkedInServiceDescription, new InMemoryOAuthTokenManager(consumerKey, consumerSecret)))
-        {
-
-        }
-        protected static readonly ServiceProviderDescription LinkedInServiceDescription = new ServiceProviderDescription
-        {
-            RequestTokenEndpoint = new MessageReceivingEndpoint(
-               string.Format(CultureInfo.InvariantCulture, "{0}{1}", Constants.ApiOAuthBaseUrl, Constants.RequestTokenResourceName),
-               HttpDeliveryMethods.AuthorizationHeaderRequest | HttpDeliveryMethods.GetRequest),
-            UserAuthorizationEndpoint = new MessageReceivingEndpoint(
-              string.Format(CultureInfo.InvariantCulture, "{0}{1}", Constants.ApiOAuthBaseUrl, Constants.AuthorizeTokenMethod),
-              HttpDeliveryMethods.AuthorizationHeaderRequest | HttpDeliveryMethods.GetRequest),
-            AccessTokenEndpoint = new MessageReceivingEndpoint(
-              string.Format(CultureInfo.InvariantCulture, "{0}{1}", Constants.ApiOAuthBaseUrl, Constants.AccessTokenResourceName),
-              HttpDeliveryMethods.AuthorizationHeaderRequest | HttpDeliveryMethods.GetRequest),
-            TamperProtectionElements = new ITamperProtectionChannelBindingElement[] { new HmacSha1SigningBindingElement() }
-        };
-
+            : base("linkedIn service", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription, new InMemoryOAuthTokenManager(consumerKey, consumerSecret)))
+        {}
 
 
         #region Profile API

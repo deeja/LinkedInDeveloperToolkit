@@ -37,7 +37,7 @@ namespace LinkedIn
     /// <param name="tokenManager">The token manager.</param>
     /// <param name="accessToken">The access token, or null if the user doesn't have one yet.</param>
     public WebOAuthAuthorization(IConsumerTokenManager tokenManager, string accessToken)
-      : this(tokenManager, accessToken, LinkedInServiceDescription)
+      : this(tokenManager, accessToken, ServiceDescriptions.LinkedInServiceDescription)
     {
     }
 
