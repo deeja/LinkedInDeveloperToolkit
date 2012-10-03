@@ -17,6 +17,7 @@ using System.Web;
 using LinkedIn;
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests.Mocks;
+using LinkedIn.Utility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LinkedIn.Tests
@@ -496,7 +497,7 @@ namespace LinkedIn.Tests
       string ResourceName = Constants.ResourceName;
       UriBuilder expected = new UriBuilder("http://api.linkedin.com/v1/people/id=12345/resource");
 
-      UriBuilder actual = target.BuildApiUrlByMemberId(memberId, ResourceName);
+      UriBuilder actual = UriUtility.BuildApiUrlByMemberId(memberId, ResourceName);
       Assert.AreEqual(expected, actual);
     }
 
@@ -514,7 +515,7 @@ namespace LinkedIn.Tests
       QueryStringParameters parameters = new QueryStringParameters();
       UriBuilder expected = new UriBuilder("http://api.linkedin.com/v1/people/~/resource");
 
-      UriBuilder actual = target.BuildApiUrlForMember(identifier, resourceName, parameters);
+      UriBuilder actual = UriUtility.BuildApiUrlForMember(identifier, resourceName, parameters);
       Assert.AreEqual(expected, actual);
     }
 
@@ -533,7 +534,7 @@ namespace LinkedIn.Tests
       UriBuilder expected = new UriBuilder("http://api.linkedin.com/v1/people/~");
       expected.Query = string.Format("{0}={1}", Constants.QueryStringParam1, Constants.QueryStringValue1);
 
-      UriBuilder actual = target.BuildApiUrlForCurrentUser(parameters);
+      UriBuilder actual = UriUtility.BuildApiUrlForCurrentUser(parameters);
       Assert.AreEqual(expected, actual);
     }
 
@@ -555,7 +556,7 @@ namespace LinkedIn.Tests
 
       UriBuilder expected = new UriBuilder("http://api.linkedin.com/v1/people/~/resource?param1=value1&param2=value2");
 
-      UriBuilder actual = target.BuildApiUrl(resources, parameters);
+      UriBuilder actual = UriUtility.BuildApiUrl(resources, parameters);
       Assert.AreEqual(expected, actual);
     }
     #endregion

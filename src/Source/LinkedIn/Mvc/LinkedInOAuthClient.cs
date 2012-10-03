@@ -23,7 +23,7 @@ namespace LinkedIn.Mvc
     public class LinkedInOAuthClient : OAuthClient, ILinkedInService
     {
         public LinkedInOAuthClient(string consumerKey, string consumerSecret)
-            : base("linkedIn service", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
+            : base("LinkedInOAuthClient", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
                                                                      new InMemoryOAuthTokenManager(consumerKey,consumerSecret)))
         {
         }

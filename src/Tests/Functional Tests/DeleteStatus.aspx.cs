@@ -1,6 +1,7 @@
 ﻿using System;
 
 using LinkedIn;
+using LinkedIn.ServiceEntities;
 using LinkedIn.Utility;
 
 public partial class DeleteStatus : LinkedInBasePage
@@ -11,7 +12,7 @@ public partial class DeleteStatus : LinkedInBasePage
     
     try
     {
-      service.DeleteStatus();
+      service.CreateShare("",VisibilityCode.Anyone);
     }
     catch (LinkedInException lie)
     {
