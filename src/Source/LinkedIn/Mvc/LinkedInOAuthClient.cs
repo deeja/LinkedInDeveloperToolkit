@@ -30,12 +30,10 @@ namespace LinkedIn.Mvc
     /// <summary>
     ///   A service to access the LinkedIn API's.
     /// </summary>
-    public class LinkedInOAuthClient : OAuthClient
+    public class LinkedInOAuthClient:OAuthClient
     {
         public LinkedInOAuthClient(string consumerKey, string consumerSecret)
-            : base(
-                "linkedIn service",
-                new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
+            : base("linkedIn service", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
                                               new InMemoryOAuthTokenManager(consumerKey, consumerSecret)))
         {
         }
@@ -224,23 +222,11 @@ namespace LinkedIn.Mvc
                 location.Path = string.Format(CultureInfo.InvariantCulture, "{0}:({1})", location.Path, listOfFields);
             }
 
-            return GetRequest<Person>(location, HttpDeliveryMethods.GetRequest);
+            return GetRequest<Person>(location.Uri);
         }
 
-        private T GetRequest<T>(UriBuilder location, HttpDeliveryMethods requestType)
-        {
-            var webRequest =
-                WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, requestType),
-                                                   GetAccessToken());
 
-            string xmlResponse = ProcessResponse(SendRequest(webRequest));
-            return Utilities.DeserializeXml<T>(xmlResponse);
-        }
 
-        private string GetAccessToken()
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         ///   Retrieve a collection of profiles for a list of member identifiers.
@@ -267,7 +253,7 @@ namespace LinkedIn.Mvc
                 location.Path = string.Format(CultureInfo.InvariantCulture, "{0}:({1})", location.Path, listOfFields);
             }
 
-            return GetRequest<People>(location, HttpDeliveryMethods.GetRequest);
+            return GetRequest<People>(location.Uri);
         }
 
         #endregion
@@ -522,7 +508,7 @@ namespace LinkedIn.Mvc
 
             location = queryStringParameters.AppendToUri(location);
 
-            return GetRequest<Connections>(location, HttpDeliveryMethods.GetRequest);
+            return GetRequest<Connections>(location.Uri);
         }
 
         #endregion
@@ -595,19 +581,11 @@ namespace LinkedIn.Mvc
                 throw new ArgumentNullException("httpHeaders",
                                                 string.Format(Resources.NotNullMessageFormat, "httpHeaders"));
             }
+            
+            return GetRequest<Person>(requestUri, httpHeaders);
 
-            var webRequest =
-                WebWorker.PrepareAuthorizedRequest(
-                    new MessageReceivingEndpoint(requestUri, HttpDeliveryMethods.GetRequest), GetAccessToken());
-
-            foreach (HttpHeader httpHeader in httpHeaders)
-            {
-                webRequest.Headers.Add(httpHeader.Name, httpHeader.Value);
-            }
-
-            string xmlResponse = ProcessResponse(SendRequest(webRequest));
-            return Utilities.DeserializeXml<Person>(xmlResponse);
         }
+
 
         #endregion
 
@@ -737,7 +715,7 @@ namespace LinkedIn.Mvc
 
             if (EnumHelper.HasFlag(updateTypes, NetworkUpdateTypes.All) == false)
             {
-                var networkUpdateTypeValues = Enum.GetValues(typeof (NetworkUpdateTypes));
+                var networkUpdateTypeValues = Enum.GetValues(typeof(NetworkUpdateTypes));
                 foreach (NetworkUpdateTypes value in networkUpdateTypeValues)
                 {
                     if (EnumHelper.HasFlag(updateTypes, value))
@@ -776,7 +754,7 @@ namespace LinkedIn.Mvc
                 resources,
                 parameters);
 
-            return GetRequest<Updates>(location, HttpDeliveryMethods.GetRequest);
+            return GetRequest<Updates>(location.Uri);
         }
 
         /// <summary>
@@ -797,7 +775,7 @@ namespace LinkedIn.Mvc
                 resources,
                 null);
 
-            return GetRequest<NetworkStats>(location, HttpDeliveryMethods.GetRequest);
+            return GetRequest<NetworkStats>(location.Uri);
         }
 
         /// <summary>
@@ -1210,7 +1188,7 @@ namespace LinkedIn.Mvc
                 location.Path = string.Format(CultureInfo.InvariantCulture, "{0}:({1})", location.Path, listOfFields);
             }
 
-            return GetRequest<PeopleSearch>(location, HttpDeliveryMethods.GetRequest);
+            return GetRequest<PeopleSearch>(location.Uri);
         }
 
         #endregion
@@ -1624,21 +1602,7 @@ namespace LinkedIn.Mvc
             return PostRequest(mailboxItem, location);
         }
 
-        private bool PostRequest<T>(T item, UriBuilder location,
-                                    HttpDeliveryMethods delivery = HttpDeliveryMethods.PostRequest)
-        {
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, delivery),
-                                                                GetAccessToken());
-            webRequest = InitializeRequest(webRequest, item);
-            HttpWebResponse webResponse = (HttpWebResponse) SendRequest(webRequest);
-            ProcessResponse(webResponse);
-            return webResponse.StatusCode == HttpStatusCode.Created;
-        }
 
-        private bool PutRequest<T>(T item, UriBuilder location)
-        {
-            return PostRequest(item, location, HttpDeliveryMethods.PutRequest);
-        }
 
         /// <summary>
         ///   Send a message to one or more persons.
@@ -1662,7 +1626,7 @@ namespace LinkedIn.Mvc
                 memberIds = new List<string>();
             }
 
-            List<Recipient> recipients = memberIds.Select(recipient => new Recipient {Path = string.Format(CultureInfo.InvariantCulture, "/people/{0}", recipient)}).ToList();
+            List<Recipient> recipients = memberIds.Select(recipient => new Recipient { Path = string.Format(CultureInfo.InvariantCulture, "/people/{0}", recipient) }).ToList();
 
             if (includeCurrentUser)
             {
@@ -1739,15 +1703,12 @@ namespace LinkedIn.Mvc
         {
             UriBuilder location =
                 new UriBuilder(string.Concat(Constants.ApiOAuthBaseUrl, Constants.InvalidateTokenMethod));
-            var webRequest =
-                WebWorker.PrepareAuthorizedRequest(
-                    new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest), accessToken);
-
-            HttpWebResponse webResponse = (HttpWebResponse) SendRequest(webRequest);
-            ProcessResponse(webResponse);
+            var webResponse = GetRequest(accessToken, location);
 
             return webResponse.StatusCode == HttpStatusCode.OK;
         }
+
+        
 
         #endregion
 
@@ -1774,7 +1735,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
         private UriBuilder BuildApiUrlForCurrentUser(string resourceName)
         {
-            return BuildApiUrlForCurrentUser(new Resource {Name = resourceName});
+            return BuildApiUrlForCurrentUser(new Resource { Name = resourceName });
         }
 
         /// <summary>
@@ -1815,7 +1776,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
         private UriBuilder BuildApiUrlForCurrentUser(ProfileType profileType, string resourceName)
         {
-            return BuildApiUrlForCurrentUser(profileType, new Resource {Name = resourceName});
+            return BuildApiUrlForCurrentUser(profileType, new Resource { Name = resourceName });
         }
 
         /// <summary>
@@ -1826,7 +1787,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
         private UriBuilder BuildApiUrlForCurrentUser(ProfileType profileType, Resource resource)
         {
-            return BuildApiUrlForCurrentUser(ProfileType.Standard, new Collection<Resource> {resource}, null);
+            return BuildApiUrlForCurrentUser(ProfileType.Standard, new Collection<Resource> { resource }, null);
         }
 
         /// <summary>
@@ -1837,7 +1798,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
         private UriBuilder BuildApiUrlForCurrentUser(string resourceName, QueryStringParameters parameters)
         {
-            return BuildApiUrlForCurrentUser(new Resource {Name = resourceName}, parameters);
+            return BuildApiUrlForCurrentUser(new Resource { Name = resourceName }, parameters);
         }
 
         /// <summary>
@@ -1848,7 +1809,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
         private UriBuilder BuildApiUrlForCurrentUser(Resource resource, QueryStringParameters parameters)
         {
-            return BuildApiUrlForCurrentUser(ProfileType.Standard, new Collection<Resource> {resource}, parameters);
+            return BuildApiUrlForCurrentUser(ProfileType.Standard, new Collection<Resource> { resource }, parameters);
         }
 
         /// <summary>
@@ -1906,7 +1867,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
         private UriBuilder BuildApiUrlForMember(string identifier, string resourceName, QueryStringParameters parameters)
         {
-            return BuildApiUrlForMember(identifier, new Resource {Name = resourceName}, parameters);
+            return BuildApiUrlForMember(identifier, new Resource { Name = resourceName }, parameters);
         }
 
         /// <summary>
@@ -1942,7 +1903,7 @@ namespace LinkedIn.Mvc
                 resources = new Collection<Resource>();
             }
 
-            resources.Insert(0, new Resource {Name = Constants.PeopleResourceName, Identifier = identifier});
+            resources.Insert(0, new Resource { Name = Constants.PeopleResourceName, Identifier = identifier });
 
             return BuildApiUrl(resources, parameters);
         }
@@ -1956,7 +1917,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> representing the API url. </returns>
         private UriBuilder BuildApiUrl(string resourceName)
         {
-            return BuildApiUrl(new Resource {Name = resourceName});
+            return BuildApiUrl(new Resource { Name = resourceName });
         }
 
         /// <summary>
@@ -1966,7 +1927,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> representing the API url. </returns>
         private UriBuilder BuildApiUrl(Resource resource)
         {
-            return BuildApiUrl(new Collection<Resource> {resource}, null);
+            return BuildApiUrl(new Collection<Resource> { resource }, null);
         }
 
         /// <summary>
@@ -1987,7 +1948,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
         private UriBuilder BuildApiUrl(string resourceName, QueryStringParameters parameters)
         {
-            return BuildApiUrl(new Resource {Name = resourceName}, parameters);
+            return BuildApiUrl(new Resource { Name = resourceName }, parameters);
         }
 
         /// <summary>
@@ -1998,7 +1959,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
         private UriBuilder BuildApiUrl(Resource resource, QueryStringParameters parameters)
         {
-            return BuildApiUrl(new Collection<Resource> {resource}, parameters);
+            return BuildApiUrl(new Collection<Resource> { resource }, parameters);
         }
 
         /// <summary>
@@ -2072,7 +2033,7 @@ namespace LinkedIn.Mvc
             HttpWebResponse webResponse = null;
             try
             {
-                webResponse = (HttpWebResponse) webRequest.GetResponse();
+                webResponse = (HttpWebResponse)webRequest.GetResponse();
             }
             catch (WebException wex)
             {
@@ -2084,7 +2045,7 @@ namespace LinkedIn.Mvc
                     throw;
                 }
 
-                webResponse = (HttpWebResponse) wex.Response;
+                webResponse = (HttpWebResponse)wex.Response;
             }
 
             return webResponse;
@@ -2141,6 +2102,54 @@ namespace LinkedIn.Mvc
             {
                 return new AuthenticationResult(ex);
             }
+        }
+
+        private string GetAccessToken()
+        {
+            throw new NotImplementedException();
+        }
+
+        private HttpWebResponse GetRequest(string accessToken, UriBuilder location)
+        {
+            var webRequest =
+                WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest),
+                                                   accessToken);
+
+            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
+            ProcessResponse(webResponse);
+            return webResponse;
+        }
+
+        private bool PostRequest<T>(T item, UriBuilder location,
+                                 HttpDeliveryMethods delivery = HttpDeliveryMethods.PostRequest)
+        {
+            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, delivery),
+                                                                GetAccessToken());
+            webRequest = InitializeRequest(webRequest, item);
+            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
+            ProcessResponse(webResponse);
+            return webResponse.StatusCode == HttpStatusCode.Created;
+        }
+
+        private bool PutRequest<T>(T item, UriBuilder location)
+        {
+            return PostRequest(item, location, HttpDeliveryMethods.PutRequest);
+        }
+
+        private T GetRequest<T>(Uri location, IEnumerable<HttpHeader> headers = null)
+        {
+            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location, HttpDeliveryMethods.GetRequest), GetAccessToken());
+            
+            if (headers != null)
+            {
+                foreach (HttpHeader httpHeader in headers)
+                {
+                    webRequest.Headers.Add(httpHeader.Name, httpHeader.Value);
+                }
+            }
+            
+            string xmlResponse = ProcessResponse(SendRequest(webRequest));
+            return Utilities.DeserializeXml<T>(xmlResponse);
         }
     }
 }
