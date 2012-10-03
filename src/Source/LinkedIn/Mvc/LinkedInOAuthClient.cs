@@ -35,7 +35,7 @@ namespace LinkedIn.Mvc
     {
         public LinkedInOAuthClient(string consumerKey, string consumerSecret)
             : base("linkedIn service", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription, new InMemoryOAuthTokenManager(consumerKey, consumerSecret)))
-        {}
+        { }
 
 
         #region Profile API
@@ -46,9 +46,9 @@ namespace LinkedIn.Mvc
         /// </summary>
         /// <param name="profileType">The type of profile to retrieve.</param>
         /// <returns>A <see cref="Person"/> representing the current user.</returns>
-        public Person GetCurrentUser(ProfileType profileType, string accessToken)
+        public Person GetCurrentUser(ProfileType profileType)
         {
-            return GetCurrentUser(profileType, new List<ProfileField>(), accessToken);
+            return GetCurrentUser(profileType, new List<ProfileField>());
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentException">When <paramref name="profileType"/> is Standard and 
         /// <paramref name="profileFields"/> contains SitePublicProfileRequestUrl.</exception>
         /// <exception cref="ArgumentNullException">When <paramref name="profileFields"/> is null.</exception>    
-        public Person GetCurrentUser(ProfileType profileType, List<ProfileField> profileFields, string accessToken)
+        public Person GetCurrentUser(ProfileType profileType, List<ProfileField> profileFields)
         {
             if (profileFields == null)
             {
@@ -76,7 +76,7 @@ namespace LinkedIn.Mvc
 
             UriBuilder locationBaseUri = BuildApiUrlForCurrentUser(profileType);
 
-            return GetProfile(locationBaseUri, profileFields, accessToken);
+            return GetProfile(locationBaseUri, profileFields);
         }
 
         /// <summary>
@@ -89,9 +89,9 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentNullException">When <paramref name="memberId"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="memberId"/> is an empty string.</exception>
         /// <remarks>You cannot use a member id to get a public profile.</remarks>
-        public Person GetProfileByMemberId(string memberId, string accessToken)
+        public Person GetProfileByMemberId(string memberId)
         {
-            return GetProfileByMemberId(memberId, new List<ProfileField>(), accessToken);
+            return GetProfileByMemberId(memberId, new List<ProfileField>());
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace LinkedIn.Mvc
         /// <paramref name="profileFields"/> contains SitePublicProfileRequestUrl. -or-
         /// when <paramref name="memberId"/> is an empty string.</exception>
         /// <remarks>You cannot use a member id to get a public profile.</remarks>
-        public Person GetProfileByMemberId(string memberId, List<ProfileField> profileFields, string accessToken)
+        public Person GetProfileByMemberId(string memberId, List<ProfileField> profileFields)
         {
             if (memberId == null)
             {
@@ -126,7 +126,7 @@ namespace LinkedIn.Mvc
             }
 
             UriBuilder location = BuildApiUrlByMemberId(memberId);
-            return GetProfile(location, profileFields, accessToken);
+            return GetProfile(location, profileFields);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentNullException">When <paramref name="memberIds"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="memberIds"/> is an empty list.</exception>
         /// <remarks>You cannot use a member id to get a public profile.</remarks>
-        public People GetProfilesByMemberIds(List<string> memberIds, string accessToken)
+        public People GetProfilesByMemberIds(List<string> memberIds)
         {
             if (memberIds == null)
             {
@@ -163,7 +163,7 @@ namespace LinkedIn.Mvc
             UriBuilder location = BuildApiUrl(Constants.PeopleResourceName);
             location.Path = string.Format(CultureInfo.InvariantCulture, "{0}::({1})", location.Path, sb.ToString());
 
-            return GetProfiles(location, new List<ProfileField>(), accessToken);
+            return GetProfiles(location, new List<ProfileField>());
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace LinkedIn.Mvc
         /// <param name="profileFields">A list of Profile fields to retrieve.</param>
         /// <returns>A <see cref="Person"/> representing the member.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="profileFields"/> is null.</exception>
-        private Person GetProfile(UriBuilder location, List<ProfileField> profileFields, string accessToken)
+        private Person GetProfile(UriBuilder location, List<ProfileField> profileFields)
         {
             if (profileFields == null)
             {
@@ -188,10 +188,21 @@ namespace LinkedIn.Mvc
                 location.Path = string.Format(CultureInfo.InvariantCulture, "{0}:({1})", location.Path, listOfFields);
             }
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest), accessToken);
+            return GetRequest<Person>(location, HttpDeliveryMethods.GetRequest);
+        }
+
+        private T GetRequest<T>(UriBuilder location, HttpDeliveryMethods requestType)
+        {
+            var webRequest =
+                WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, requestType), GetAccessToken());
 
             string xmlResponse = ProcessResponse(SendRequest(webRequest));
-            return Utilities.DeserializeXml<Person>(xmlResponse);
+            return Utilities.DeserializeXml<T>(xmlResponse);
+        }
+
+        private string GetAccessToken()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -201,7 +212,7 @@ namespace LinkedIn.Mvc
         /// <param name="profileFields">A list of Profile fields to retrieve.</param>
         /// <returns>A <see cref="People"/> object representing a collection of profiles.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="profileFields"/> is null.</exception>
-        private People GetProfiles(UriBuilder location, List<ProfileField> profileFields, string accessToken)
+        private People GetProfiles(UriBuilder location, List<ProfileField> profileFields)
         {
             if (profileFields == null)
             {
@@ -216,10 +227,7 @@ namespace LinkedIn.Mvc
                 location.Path = string.Format(CultureInfo.InvariantCulture, "{0}:({1})", location.Path, listOfFields);
             }
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest), accessToken);
-
-            string xmlResponse = ProcessResponse(SendRequest(webRequest));
-            return Utilities.DeserializeXml<People>(xmlResponse);
+            return GetRequest<People>(location, HttpDeliveryMethods.GetRequest);
         }
         #endregion
 
@@ -232,7 +240,7 @@ namespace LinkedIn.Mvc
         /// <returns>A <see cref="Connections"/> object representing the connections.</returns>
         public Connections GetConnectionsForCurrentUser(string accessToken)
         {
-            return GetConnectionsForCurrentUser(new List<ProfileField>(), -1, -1, Modified.Updated, 1, accessToken);
+            return GetConnectionsForCurrentUser(new List<ProfileField>(), -1, -1, Modified.Updated, 1);
         }
 
         /// <summary>
@@ -245,7 +253,7 @@ namespace LinkedIn.Mvc
         /// <param name="modifiedSince">Time since the connections are modified (in milliseconds since epoch).</param>
         /// <returns>A <see cref="Connections"/> object representing the connections.</returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="modifiedSince"/> is not a valid timestamp.</exception>
-        public Connections GetConnectionsForCurrentUser(List<ProfileField> profileFields, Modified modified, int modifiedSince, string accessToken)
+        public Connections GetConnectionsForCurrentUser(List<ProfileField> profileFields, Modified modified, int modifiedSince)
         {
             if (modifiedSince <= 0)
             {
@@ -253,7 +261,7 @@ namespace LinkedIn.Mvc
             }
 
             UriBuilder location = BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
-            return GetConnections(location, profileFields, -1, -1, modified, modifiedSince, accessToken);
+            return GetConnections(location, profileFields, -1, -1, modified, modifiedSince);
         }
 
         /// <summary>
@@ -265,10 +273,10 @@ namespace LinkedIn.Mvc
         /// <param name="start">Starting location within the result set for paginated returns.</param>
         /// <param name="count">Number of results to return.</param>
         /// <returns>A <see cref="Connections"/> object representing the connections.</returns>
-        public Connections GetConnectionsForCurrentUser(List<ProfileField> profileFields, int start, int count, string accessToken)
+        public Connections GetConnectionsForCurrentUser(List<ProfileField> profileFields, int start, int count)
         {
             UriBuilder location = BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
-            return GetConnections(location, profileFields, start, count, Modified.All, 1, accessToken);
+            return GetConnections(location, profileFields, start, count, Modified.All, 1);
         }
 
         /// <summary>
@@ -283,7 +291,7 @@ namespace LinkedIn.Mvc
         /// <param name="modifiedSince">Time since the connections are modified (in milliseconds since epoch).</param>
         /// <returns>A <see cref="Connections"/> object representing the connections.</returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="modifiedSince"/> is not a valid timestamp.</exception>
-        public Connections GetConnectionsForCurrentUser(List<ProfileField> profileFields, int start, int count, Modified modified, int modifiedSince, string accessToken)
+        public Connections GetConnectionsForCurrentUser(List<ProfileField> profileFields, int start, int count, Modified modified, int modifiedSince)
         {
             if (modifiedSince <= 0)
             {
@@ -291,7 +299,7 @@ namespace LinkedIn.Mvc
             }
 
             UriBuilder location = BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
-            return GetConnections(location, profileFields, start, count, modified, modifiedSince, accessToken);
+            return GetConnections(location, profileFields, start, count, modified, modifiedSince);
         }
 
         /// <summary>
@@ -304,9 +312,9 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentNullException">When <paramref name="memberId"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="memberId"/> is an empty string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="modifiedSince"/> is not a valid timestamp.</exception>
-        public Connections GetConnectionsByMemberId(string memberId, string accessToken)
+        public Connections GetConnectionsByMemberId(string memberId)
         {
-            return GetConnectionsByMemberId(memberId, null, -1, -1, accessToken);
+            return GetConnectionsByMemberId(memberId, null, -1, -1);
         }
 
         /// <summary>
@@ -320,14 +328,14 @@ namespace LinkedIn.Mvc
         /// <returns>A <see cref="Connections"/> object representing the connections.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="memberId"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="memberId"/> is an empty string.</exception>
-        public Connections GetConnectionsByMemberId(string memberId, Modified modified, int modifiedSince, string accessToken)
+        public Connections GetConnectionsByMemberId(string memberId, Modified modified, int modifiedSince)
         {
             if (modifiedSince <= 0)
             {
                 throw new ArgumentOutOfRangeException("modifiedSince", string.Format(Resources.TimeStampOutOfRangeMessageFormat, "modifiedSince"));
             }
 
-            return GetConnectionsByMemberId(memberId, null, -1, -1, modified, modifiedSince, accessToken);
+            return GetConnectionsByMemberId(memberId, null, -1, -1, modified, modifiedSince);
         }
 
         /// <summary>
@@ -342,9 +350,9 @@ namespace LinkedIn.Mvc
         /// <returns>A <see cref="Connections"/> object representing the connections.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="memberId"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="memberId"/> is an empty string.</exception>
-        public Connections GetConnectionsByMemberId(string memberId, List<ProfileField> profileFields, int start, int count, string accessToken)
+        public Connections GetConnectionsByMemberId(string memberId, List<ProfileField> profileFields, int start, int count)
         {
-            return GetConnectionsByMemberId(memberId, profileFields, start, count, Modified.All, 1, accessToken);
+            return GetConnectionsByMemberId(memberId, profileFields, start, count, Modified.All, 1);
         }
 
         /// <summary>
@@ -362,7 +370,7 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentNullException">When <paramref name="memberId"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="memberId"/> is an empty string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="modifiedSince"/> is not a valid timestamp.</exception>
-        public Connections GetConnectionsByMemberId(string memberId, List<ProfileField> profileFields, int start, int count, Modified modified, int modifiedSince, string accessToken)
+        public Connections GetConnectionsByMemberId(string memberId, List<ProfileField> profileFields, int start, int count, Modified modified, int modifiedSince)
         {
             if (memberId == null)
             {
@@ -380,7 +388,7 @@ namespace LinkedIn.Mvc
             }
 
             UriBuilder location = BuildApiUrlByMemberId(memberId, Constants.ConnectionsResourceName);
-            return GetConnections(location, profileFields, start, count, modified, modifiedSince, accessToken);
+            return GetConnections(location, profileFields, start, count, modified, modifiedSince);
         }
 
         /// <summary>
@@ -394,7 +402,7 @@ namespace LinkedIn.Mvc
         /// <param name="modifiedSince">Time since the connections are modified (in milliseconds since epoch).</param>
         /// <returns>A <see cref="Connections"/> object representing the connections.</returns>
         /// <exception cref="ArgumentException">When <paramref name="profileFields"/> contains SitePublicProfileRequestUrl.</exception>
-        private Connections GetConnections(UriBuilder location, List<ProfileField> profileFields, int start, int count, Modified modified, int modifiedSince, string accessToken)
+        private Connections GetConnections(UriBuilder location, List<ProfileField> profileFields, int start, int count, Modified modified, int modifiedSince)
         {
             if (profileFields.Contains(ProfileField.SitePublicProfileRequestUrl))
             {
@@ -433,10 +441,8 @@ namespace LinkedIn.Mvc
 
             location = queryStringParameters.AppendToUri(location);
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest), accessToken);
+            return GetRequest<Connections>(location, HttpDeliveryMethods.GetRequest);
 
-            string xmlResponse = this.ProcessResponse(SendRequest(webRequest));
-            return Utilities.DeserializeXml<Connections>(xmlResponse);
         }
         #endregion
 
@@ -450,7 +456,7 @@ namespace LinkedIn.Mvc
         /// <returns>A <see cref="Person"/> representing the profile.</returns>
         /// <exception cref="ArgumentException">When the url in <paramref name="apiRequest"/> is invalid.</exception>
         /// <exception cref="ArgumentNullException">When <paramref name="apiRequest"/> is null.</exception>
-        public Person GetOutOfNetworkProfile(ApiRequest apiRequest, string accessToken)
+        public Person GetOutOfNetworkProfile(ApiRequest apiRequest)
         {
             if (apiRequest == null)
             {
@@ -472,7 +478,7 @@ namespace LinkedIn.Mvc
                 throw new ArgumentException("apiRequest", Resources.InvalidUrlApiRequestMessage);
             }
 
-            return GetOutOfNetworkProfile(requestUri, apiRequest.Headers, accessToken);
+            return GetOutOfNetworkProfile(requestUri, apiRequest.Headers);
         }
 
         /// <summary>
@@ -485,7 +491,7 @@ namespace LinkedIn.Mvc
         /// <returns>A <see cref="Person"/> representing the profile.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="requestUri"/> is null. -or-
         /// when <paramref name="httpHeaders"/> is null.</exception>
-        public Person GetOutOfNetworkProfile(Uri requestUri, IEnumerable<HttpHeader> httpHeaders, string accessToken)
+        public Person GetOutOfNetworkProfile(Uri requestUri, IEnumerable<HttpHeader> httpHeaders)
         {
             if (requestUri == null)
             {
@@ -497,7 +503,7 @@ namespace LinkedIn.Mvc
                 throw new ArgumentNullException("httpHeaders", string.Format(Resources.NotNullMessageFormat, "httpHeaders"));
             }
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(requestUri, HttpDeliveryMethods.GetRequest), accessToken);
+            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(requestUri, HttpDeliveryMethods.GetRequest), GetAccessToken());
 
             foreach (HttpHeader httpHeader in httpHeaders)
             {
@@ -517,9 +523,9 @@ namespace LinkedIn.Mvc
         /// </summary>
         /// <param name="updateType">The type of Network Updates to retrieve.</param>
         /// <returns>A <see cref="Network"/> object representing the Network Updates.</returns>
-        public Updates GetNetworkUpdates(NetworkUpdateTypes updateType, string accessToken)
+        public Updates GetNetworkUpdates(NetworkUpdateTypes updateType)
         {
-            return GetNetworkUpdates(updateType, Constants.MaxNumberOfNetworkUpdates, 0, DateTime.MinValue, DateTime.MinValue, false, accessToken);
+            return GetNetworkUpdates(updateType, Constants.MaxNumberOfNetworkUpdates, 0, DateTime.MinValue, DateTime.MinValue, false);
         }
 
         /// <summary>
@@ -530,9 +536,9 @@ namespace LinkedIn.Mvc
         /// <param name="updateType">The type of Network Updates to retrieve.</param>
         /// <param name="scope">The scope of the network updates (the current user his updates or the aggregated network updates).</param>
         /// <returns>A <see cref="Network"/> object representing the Network Updates.</returns>
-        public Updates GetNetworkUpdates(NetworkUpdateTypes updateType, Scope scope, string accessToken)
+        public Updates GetNetworkUpdates(NetworkUpdateTypes updateType, Scope scope)
         {
-            return GetNetworkUpdates(updateType, Constants.MaxNumberOfNetworkUpdates, 0, DateTime.MinValue, DateTime.MinValue, false, scope, accessToken);
+            return GetNetworkUpdates(updateType, Constants.MaxNumberOfNetworkUpdates, 0, DateTime.MinValue, DateTime.MinValue, false, scope);
         }
 
         /// <summary>
@@ -544,9 +550,9 @@ namespace LinkedIn.Mvc
         /// <param name="after">The <see cref="DateTime"/> after which to retrieve updates for.</param>
         /// <param name="before">The <see cref="DateTime"/> before which to retrieve updates for.</param>
         /// <returns>A <see cref="Network"/> object representing the Network Updates.</returns>
-        public Updates GetNetworkUpdates(NetworkUpdateTypes updateType, DateTime after, DateTime before, string accessToken)
+        public Updates GetNetworkUpdates(NetworkUpdateTypes updateType, DateTime after, DateTime before)
         {
-            return GetNetworkUpdates(updateType, Constants.MaxNumberOfNetworkUpdates, 0, after, before, false, accessToken);
+            return GetNetworkUpdates(updateType, Constants.MaxNumberOfNetworkUpdates, 0, after, before, false);
         }
 
         /// <summary>
@@ -562,9 +568,9 @@ namespace LinkedIn.Mvc
         /// <returns>A <see cref="Network"/> object representing the Network Updates.</returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="count"/> is smaller then zero. -or-
         /// when <paramref name="start"/> is smaller then zero.</exception>
-        public Updates GetNetworkUpdates(NetworkUpdateTypes updateTypes, int count, int start, DateTime after, DateTime before, string accessToken)
+        public Updates GetNetworkUpdates(NetworkUpdateTypes updateTypes, int count, int start, DateTime after, DateTime before)
         {
-            return GetNetworkUpdates(updateTypes, count, start, after, before, false, accessToken);
+            return GetNetworkUpdates(updateTypes, count, start, after, before, false);
         }
 
         /// <summary>
@@ -581,9 +587,9 @@ namespace LinkedIn.Mvc
         /// <returns>A <see cref="Network"/> object representing the Network Updates.</returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="count"/> is smaller then zero. -or-
         /// when <paramref name="start"/> is smaller then zero.</exception>
-        public Updates GetNetworkUpdates(NetworkUpdateTypes updateTypes, int count, int start, DateTime after, DateTime before, bool showHiddenMembers, string accessToken)
+        public Updates GetNetworkUpdates(NetworkUpdateTypes updateTypes, int count, int start, DateTime after, DateTime before, bool showHiddenMembers)
         {
-            return GetNetworkUpdates(updateTypes, count, start, after, before, showHiddenMembers, Scope.Connections, accessToken);
+            return GetNetworkUpdates(updateTypes, count, start, after, before, showHiddenMembers, Scope.Connections);
         }
 
         /// <summary>
@@ -601,7 +607,7 @@ namespace LinkedIn.Mvc
         /// <returns>A <see cref="Network"/> object representing the Network Updates.</returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="count"/> is smaller then zero. -or-
         /// when <paramref name="start"/> is smaller then zero.</exception>
-        public Updates GetNetworkUpdates(NetworkUpdateTypes updateTypes, int count, int start, DateTime after, DateTime before, bool showHiddenMembers, Scope scope, string accessToken)
+        public Updates GetNetworkUpdates(NetworkUpdateTypes updateTypes, int count, int start, DateTime after, DateTime before, bool showHiddenMembers, Scope scope)
         {
             if (count < 0)
             {
@@ -656,11 +662,7 @@ namespace LinkedIn.Mvc
               resources,
               parameters);
 
-
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest), accessToken);
-
-            string xmlResponse = ProcessResponse(SendRequest(webRequest));
-            return Utilities.DeserializeXml<Updates>(xmlResponse);
+            return GetRequest<Updates>(location, HttpDeliveryMethods.GetRequest);
         }
 
         /// <summary>
@@ -681,10 +683,8 @@ namespace LinkedIn.Mvc
               resources,
               null);
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest), accessToken);
+            return GetRequest<NetworkStats>(location, HttpDeliveryMethods.GetRequest);
 
-            string xmlResponse = ProcessResponse(SendRequest(webRequest));
-            return Utilities.DeserializeXml<NetworkStats>(xmlResponse);
         }
 
         /// <summary>
@@ -699,7 +699,7 @@ namespace LinkedIn.Mvc
         /// when <paramref name="comment"/> is null.</exception>
         /// <exception cref="ArgumentNullException">When <paramref name="updateKey"/> is an empty string. -or-
         /// when <paramref name="comment"/> is an empty string.</exception>
-        public bool CommentOnNetworkUpdate(string updateKey, string comment, string accessToken)
+        public bool CommentOnNetworkUpdate(string updateKey, string comment)
         {
             if (updateKey == null)
             {
@@ -740,13 +740,7 @@ namespace LinkedIn.Mvc
           new Resource { Name = Constants.UpdateCommentsResourceName }
         });
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PostRequest), accessToken);
-
-            webRequest = InitializeRequest<UpdateComment>(webRequest, updateComment);
-            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-            ProcessResponse(webResponse);
-
-            return webResponse.StatusCode == HttpStatusCode.Created;
+            return PostRequest(updateComment, location);
         }
 
         /// <summary>
@@ -756,7 +750,7 @@ namespace LinkedIn.Mvc
         /// <returns><b>true</b> if successful; otherwise <b>false</b>.</returns>
         /// <exception cref="ArgumentException">When <paramref name="updateKey"/> is null.</exception>
         /// <exception cref="ArgumentNullException">When <paramref name="updateKey"/> is an empty string.</exception>
-        public bool LikeNetworkUpdate(string updateKey, string accessToken)
+        public bool LikeNetworkUpdate(string updateKey)
         {
             if (updateKey == null)
             {
@@ -782,13 +776,8 @@ namespace LinkedIn.Mvc
           new Resource { Name = Constants.IsLikedResourceName }
         });
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PutRequest), accessToken);
+            return PutRequest(isLiked, location);
 
-            webRequest = InitializeRequest<IsLiked>(webRequest, isLiked);
-            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-            ProcessResponse(webResponse);
-
-            return webResponse.StatusCode == HttpStatusCode.Created;
         }
 
         /// <summary>
@@ -798,7 +787,7 @@ namespace LinkedIn.Mvc
         /// <returns><b>true</b> if successful; otherwise <b>false</b>.</returns>
         /// <exception cref="ArgumentException">When <paramref name="updateKey"/> is null.</exception>
         /// <exception cref="ArgumentNullException">When <paramref name="updateKey"/> is an empty string.</exception>
-        public bool UnlikeNetworkUpdate(string updateKey, string accessToken)
+        public bool UnlikeNetworkUpdate(string updateKey)
         {
             if (updateKey == null)
             {
@@ -824,13 +813,8 @@ namespace LinkedIn.Mvc
           new Resource { Name = Constants.IsLikedResourceName }
         });
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PutRequest), accessToken);
+            return PutRequest(isLiked, location);
 
-            webRequest = InitializeRequest<IsLiked>(webRequest, isLiked);
-            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-            ProcessResponse(webResponse);
-
-            return webResponse.StatusCode == HttpStatusCode.Created;
         }
         #endregion
 
@@ -845,7 +829,7 @@ namespace LinkedIn.Mvc
         /// <param name="count">Number of results to return.</param>
         /// <returns>A <see cref="People"/> object representing the search result.</returns>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="count"/> is smaller then zero or larger then 25.</exception>
-        public PeopleSearch Search(string keywords, int start, int count, string accessToken)
+        public PeopleSearch Search(string keywords, int start, int count)
         {
             return Search(
               keywords,
@@ -865,7 +849,7 @@ namespace LinkedIn.Mvc
               count,
               null,
               null,
-              null, accessToken);
+              null);
         }
 
         /// <summary>
@@ -894,7 +878,7 @@ namespace LinkedIn.Mvc
           SortCriteria sortCriteria,
           int start,
           int count,
-          Collection<ProfileField> profileFields, string accessToken)
+          Collection<ProfileField> profileFields)
         {
             return Search(
               keywords,
@@ -914,7 +898,7 @@ namespace LinkedIn.Mvc
               count,
               profileFields,
               null,
-              null, accessToken);
+              null);
         }
 
         /// <summary>
@@ -963,7 +947,7 @@ namespace LinkedIn.Mvc
           int count,
           Collection<ProfileField> profileFields,
           Collection<FacetField> facetFields,
-          Dictionary<FacetCode, Collection<string>> facets, string accessToken)
+          Dictionary<FacetCode, Collection<string>> facets)
         {
             // TODO: Country code and postal code validation
             if (string.IsNullOrEmpty(postalCode) == false && string.IsNullOrEmpty(countryCode))
@@ -1065,57 +1049,8 @@ namespace LinkedIn.Mvc
                 location.Path = string.Format(CultureInfo.InvariantCulture, "{0}:({1})", location.Path, listOfFields);
             }
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest), accessToken);
+            return GetRequest<PeopleSearch>(location, HttpDeliveryMethods.GetRequest);
 
-            string xmlResponse = ProcessResponse(SendRequest(webRequest));
-            return Utilities.DeserializeXml<PeopleSearch>(xmlResponse);
-        }
-        #endregion
-
-        #region Status Update API
-        /// <summary>
-        /// Update the status of the current user.
-        /// <para />
-        /// For more info see: http://developer.linkedin.com/docs/DOC-1007
-        /// </summary>
-        /// <param name="status">The new status.</param>
-        [Obsolete("Please use the Share API")]
-        public void UpdateStatus(string status, string accessToken)
-        {
-            if (string.IsNullOrEmpty(status))
-            {
-                DeleteStatus(accessToken);
-            }
-            else if (status.Length > Constants.MaxStatusLength)
-            {
-                throw new ArgumentOutOfRangeException("status", Resources.StatusOutOfRangeMessage);
-            }
-            else
-            {
-                UriBuilder location = BuildApiUrlForCurrentUser(Constants.CurrentStatusResourceName);
-
-                CurrentStatus currentStatus = new CurrentStatus();
-                currentStatus.Status = status;
-
-                var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PutRequest), accessToken);
-
-                webRequest = InitializeRequest<CurrentStatus>(webRequest, currentStatus);
-                string xmlResponse = ProcessResponse(SendRequest(webRequest));
-            }
-        }
-
-        /// <summary>
-        /// Delete the current user his status.
-        /// <para />
-        /// For more info see: http://developer.linkedin.com/docs/DOC-1007
-        /// </summary>
-        [Obsolete("Please use the Share API")]
-        public void DeleteStatus(string accessToken)
-        {
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.CurrentStatusResourceName);
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.DeleteRequest), accessToken);
-
-            string xmlResponse = ProcessResponse(SendRequest(webRequest));
         }
         #endregion
 
@@ -1131,7 +1066,7 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentNullException">When <paramref name="comment"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="comment"/> is an empty string. -or-
         /// when <paramref name="visibility" /> is unknown.</exception>
-        public bool CreateShare(string comment, VisibilityCode visibility, string accessToken)
+        public bool CreateShare(string comment, VisibilityCode visibility)
         {
             if (comment == null)
             {
@@ -1143,7 +1078,7 @@ namespace LinkedIn.Mvc
                 throw new ArgumentException(string.Format(Resources.NotEmptyStringMessageFormat, "comment"), "comment");
             }
 
-            return CreateShare(comment, string.Empty, string.Empty, null, null, visibility, false, accessToken);
+            return CreateShare(comment, string.Empty, string.Empty, null, null, visibility, false);
         }
 
         /// <summary>
@@ -1165,7 +1100,7 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="comment"/> is longer then 700 characters. -or-
         /// when <paramref name="title"/> is longer then 200 characters. -or-
         /// when <paramref name="description"/> is longer then 400 characters.</exception>
-        public bool CreateShare(string comment, string title, string description, Uri uri, Uri imageUri, VisibilityCode visibility, bool postOnTwitter, string accessToken)
+        public bool CreateShare(string comment, string title, string description, Uri uri, Uri imageUri, VisibilityCode visibility, bool postOnTwitter)
         {
             if (string.IsNullOrEmpty(comment) &&
               (string.IsNullOrEmpty(title) || uri == null))
@@ -1212,14 +1147,8 @@ namespace LinkedIn.Mvc
             }
 
             UriBuilder location = BuildApiUrlForCurrentUser(Constants.SharesResourceName, queryStringParameters);
+            return PostRequest(share, location);
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PostRequest), accessToken);
-
-            webRequest = InitializeRequest<Share>(webRequest, share);
-            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-            ProcessResponse(webResponse);
-
-            return webResponse.StatusCode == HttpStatusCode.Created;
         }
 
         /// <summary>
@@ -1235,7 +1164,7 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentException">When <paramref name="shareId"/> is an empty string. -or-
         /// When <paramref name="visibility" /> is unknown.</exception>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="comment"/> is longer then 700 characters.</exception>
-        public bool CreateReShare(string comment, string shareId, VisibilityCode visibility, string accessToken)
+        public bool CreateReShare(string comment, string shareId, VisibilityCode visibility)
         {
             if (comment != null && comment.Length > Constants.MaxShareCommentLength)
             {
@@ -1275,13 +1204,7 @@ namespace LinkedIn.Mvc
 
             UriBuilder location = BuildApiUrlForCurrentUser(Constants.SharesResourceName);
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PostRequest), accessToken);
-
-            webRequest = InitializeRequest<ReShare>(webRequest, reshare);
-            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-            ProcessResponse(webResponse);
-
-            return webResponse.StatusCode == HttpStatusCode.Created;
+            return PostRequest(reshare, location);
         }
         #endregion
 
@@ -1303,7 +1226,7 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentNullException">When <paramref name="personId"/> is null. -or-
         /// when <paramref name="subject"/> is null. -or-
         /// when <paramref name="body"/> is null.</exception>
-        public bool InvitePerson(string personId, string subject, string body, ConnectionType connectionType, ApiRequest apiRequest, string accessToken)
+        public bool InvitePerson(string personId, string subject, string body, ConnectionType connectionType, ApiRequest apiRequest)
         {
             if (personId == null)
             {
@@ -1358,7 +1281,7 @@ namespace LinkedIn.Mvc
                 Authorization = new KeyValuePair<string, string>(authorizationParams[0], authorizationParams[1])
             };
 
-            return InvitePerson(mailboxItem, accessToken);
+            return InvitePerson(mailboxItem);
         }
 
         /// <summary>
@@ -1383,7 +1306,7 @@ namespace LinkedIn.Mvc
         /// when <paramref name="lastName"/> is null. -or-
         /// when <paramref name="subject"/> is null. -or-
         /// when <paramref name="body"/> is null.</exception>
-        public bool InvitePerson(string emailAddress, string firstName, string lastName, string subject, string body, ConnectionType connectionType, string accessToken)
+        public bool InvitePerson(string emailAddress, string firstName, string lastName, string subject, string body, ConnectionType connectionType)
         {
             if (emailAddress == null)
             {
@@ -1450,7 +1373,7 @@ namespace LinkedIn.Mvc
                 ConnectType = connectionType
             };
 
-            return InvitePerson(mailboxItem, accessToken);
+            return InvitePerson(mailboxItem);
         }
 
         /// <summary>
@@ -1458,18 +1381,25 @@ namespace LinkedIn.Mvc
         /// </summary>
         /// <param name="mailboxItem">A <see cref="MailboxItem"/> representing the invitation.</param>
         /// <returns><b>true</b> if successful; otherwise <b>false</b>.</returns>
-        private bool InvitePerson(MailboxItem mailboxItem, string accessToken)
+        private bool InvitePerson(MailboxItem mailboxItem)
         {
             UriBuilder location = BuildApiUrlForCurrentUser(Constants.MailboxResourceName);
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PostRequest), accessToken);
+            return PostRequest(mailboxItem, location);
+        }
 
-            webRequest = InitializeRequest<MailboxItem>(webRequest, mailboxItem);
+        private bool PostRequest<T>(T item, UriBuilder location, HttpDeliveryMethods delivery = HttpDeliveryMethods.PostRequest)
+        {
+            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, delivery), GetAccessToken());
+            webRequest = InitializeRequest(webRequest, item);
             HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-
             ProcessResponse(webResponse);
-
             return webResponse.StatusCode == HttpStatusCode.Created;
+        }
+
+        private bool PutRequest<T>(T item, UriBuilder location)
+        {
+            return PostRequest(item, location, HttpDeliveryMethods.PutRequest);
         }
 
         /// <summary>
@@ -1482,7 +1412,7 @@ namespace LinkedIn.Mvc
         /// <param name="memberIds">A list of member identifiers.</param>
         /// <param name="includeCurrentUser">Whether to send the message to the current user.</param>
         /// <returns><b>true</b> if successful; otherwise <b>false</b>.</returns>
-        public bool SendMessage(string subject, string body, IEnumerable<string> memberIds, bool includeCurrentUser, string accessToken)
+        public bool SendMessage(string subject, string body, IEnumerable<string> memberIds, bool includeCurrentUser)
         {
             if (memberIds == null)
             {
@@ -1513,14 +1443,8 @@ namespace LinkedIn.Mvc
 
             UriBuilder location = BuildApiUrlForCurrentUser(Constants.MailboxResourceName);
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PostRequest), accessToken);
+            return PostRequest(mailboxItem, location);
 
-            webRequest = InitializeRequest<MailboxItem>(webRequest, mailboxItem);
-            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-
-            string xmlResponse = ProcessResponse(webResponse);
-
-            return webResponse.StatusCode == HttpStatusCode.Created;
         }
         #endregion
 
@@ -1535,7 +1459,7 @@ namespace LinkedIn.Mvc
         /// <returns><b>true</b> if successful; otherwise <b>false</b>.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="body"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="body"/> is an empty string.</exception>
-        public bool PostNetworkUpdate(string cultureName, string body, string accessToken)
+        public bool PostNetworkUpdate(string cultureName, string body)
         {
             if (body == null)
             {
@@ -1558,14 +1482,7 @@ namespace LinkedIn.Mvc
 
             UriBuilder location = BuildApiUrlForCurrentUser(Constants.PersonActivitiesResourceName);
 
-            var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.PostRequest), accessToken);
-
-            webRequest = InitializeRequest(webRequest, activity);
-            HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-
-            string xmlResponse = ProcessResponse(webResponse);
-
-            return webResponse.StatusCode == HttpStatusCode.Created;
+            return PostRequest(activity, location);
         }
         #endregion
 
@@ -1940,12 +1857,12 @@ namespace LinkedIn.Mvc
 
             try
             {
-                Person currentUser = GetCurrentUser(ProfileType.Standard, new List<ProfileField>(){ProfileField.Summary, ProfileField.Industry, ProfileField.Headline, ProfileField.PersonId, ProfileField.LastName, ProfileField.FirstName}, accessToken);
+                Person currentUser = GetCurrentUser(ProfileType.Standard, new List<ProfileField>() { ProfileField.Summary, ProfileField.Industry, ProfileField.Headline, ProfileField.PersonId, ProfileField.LastName, ProfileField.FirstName });
                 var providerUserId = currentUser.Id;
 
                 Dictionary<string, string> dictionary = new Dictionary<string, string>
                                                             {
-                                                                {"accesstoken", accessToken},
+                                                                {"accesstoken",accessToken},
                                                                 {"name", currentUser.Name},
                                                                 {"headline", currentUser.Headline},
                                                                 {"summary", currentUser.Summary},
