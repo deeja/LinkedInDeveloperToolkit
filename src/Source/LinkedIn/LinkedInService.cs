@@ -29,11 +29,11 @@ using LinkedIn.Utility;
 
 namespace LinkedIn
 {
-  /// <summary>
+    /// <summary>
   /// A service to access the LinkedIn API's.
   /// </summary>
-  public class LinkedInService
-  {
+  public class LinkedInService : ILinkedInService
+    {
     #region Constructors
     /// <summary>
     /// Initializes a new instance of the <see cref="LinkedInService"/> class.
@@ -1074,51 +1074,6 @@ namespace LinkedIn
       WebRequest webRequest = this.Authorization.InitializeGetRequest(location.Uri);
       string xmlResponse = ProcessResponse(SendRequest(webRequest));
       return Utilities.DeserializeXml<PeopleSearch>(xmlResponse);
-    }
-    #endregion
-
-    #region Status Update API
-    /// <summary>
-    /// Update the status of the current user.
-    /// <para />
-    /// For more info see: http://developer.linkedin.com/docs/DOC-1007
-    /// </summary>
-    /// <param name="status">The new status.</param>
-    [Obsolete("Please use the Share API")]
-    public void UpdateStatus(string status)
-    {
-      if (string.IsNullOrEmpty(status))
-      {
-        DeleteStatus();
-      }
-      else if (status.Length > Constants.MaxStatusLength)
-      {
-        throw new ArgumentOutOfRangeException("status", Resources.StatusOutOfRangeMessage);
-      }
-      else
-      {
-        UriBuilder location = BuildApiUrlForCurrentUser(Constants.CurrentStatusResourceName);
-
-        CurrentStatus currentStatus = new CurrentStatus();
-        currentStatus.Status = status;
-
-        WebRequest webRequest = this.Authorization.InitializePutRequest(location.Uri);
-        webRequest = InitializeRequest<CurrentStatus>(webRequest, currentStatus);
-        string xmlResponse = ProcessResponse(SendRequest(webRequest));
-      }
-    }
-
-    /// <summary>
-    /// Delete the current user his status.
-    /// <para />
-    /// For more info see: http://developer.linkedin.com/docs/DOC-1007
-    /// </summary>
-    [Obsolete("Please use the Share API")]
-    public void DeleteStatus()
-    {
-      UriBuilder location = BuildApiUrlForCurrentUser(Constants.CurrentStatusResourceName);
-      WebRequest webRequest = this.Authorization.InitializeDeleteRequest(location.Uri);
-      string xmlResponse = ProcessResponse(SendRequest(webRequest));
     }
     #endregion
 

@@ -30,13 +30,13 @@ namespace LinkedIn.Mvc
     /// <summary>
     ///   A service to access the LinkedIn API's.
     /// </summary>
-    public class LinkedInOAuthClient:OAuthClient
+    public class LinkedInOAuthClient : OAuthClient, ILinkedInService
     {
         public LinkedInOAuthClient(string consumerKey, string consumerSecret)
             : base("linkedIn service", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
-                                              new InMemoryOAuthTokenManager(consumerKey, consumerSecret)))
-        {
-        }
+                                                                     new InMemoryOAuthTokenManager(consumerKey,
+                                                                                                   consumerSecret)))
+        {}
 
         #region Profile API
 
@@ -266,7 +266,7 @@ namespace LinkedIn.Mvc
         ///   For more info see: http://developer.linkedin.com/docs/DOC-1004
         /// </summary>
         /// <returns> A <see cref="Connections" /> object representing the connections. </returns>
-        public Connections GetConnectionsForCurrentUser(string accessToken)
+        public Connections GetConnectionsForCurrentUser()
         {
             return GetConnectionsForCurrentUser(new List<ProfileField>(), -1, -1, Modified.Updated, 1);
         }
@@ -581,7 +581,7 @@ namespace LinkedIn.Mvc
                 throw new ArgumentNullException("httpHeaders",
                                                 string.Format(Resources.NotNullMessageFormat, "httpHeaders"));
             }
-            
+
             return GetRequest<Person>(requestUri, httpHeaders);
 
         }
@@ -763,7 +763,7 @@ namespace LinkedIn.Mvc
         ///   For more info see: http://developer.linkedin.com/docs/DOC-1006
         /// </summary>
         /// <returns> A <see cref="NetworkStats" /> object representing the network statistics. </returns>
-        public NetworkStats GetNetworkStatistics(string accessToken)
+        public NetworkStats GetNetworkStatistics()
         {
             Collection<Resource> resources = new Collection<Resource>
                                                  {
@@ -1626,7 +1626,11 @@ namespace LinkedIn.Mvc
                 memberIds = new List<string>();
             }
 
-            List<Recipient> recipients = memberIds.Select(recipient => new Recipient { Path = string.Format(CultureInfo.InvariantCulture, "/people/{0}", recipient) }).ToList();
+            List<Recipient> recipients =
+                memberIds.Select(
+                    recipient =>
+                    new Recipient { Path = string.Format(CultureInfo.InvariantCulture, "/people/{0}", recipient) }).ToList
+                    ();
 
             if (includeCurrentUser)
             {
@@ -1699,16 +1703,16 @@ namespace LinkedIn.Mvc
         ///   Invalidate the currently used OAuth token.
         /// </summary>
         /// <returns> <b>true</b> if successful; otherwise <b>false</b> . </returns>
-        public bool InvalidateToken(string accessToken)
+        public bool InvalidateToken()
         {
             UriBuilder location =
                 new UriBuilder(string.Concat(Constants.ApiOAuthBaseUrl, Constants.InvalidateTokenMethod));
-            var webResponse = GetRequest(accessToken, location);
+            var webResponse = GetRequest(location);
 
             return webResponse.StatusCode == HttpStatusCode.OK;
         }
 
-        
+
 
         #endregion
 
@@ -2072,7 +2076,6 @@ namespace LinkedIn.Mvc
 
         protected override AuthenticationResult VerifyAuthenticationCore(AuthorizedTokenResponse response)
         {
-            string accessToken = response.AccessToken;
 
             try
             {
@@ -2090,7 +2093,7 @@ namespace LinkedIn.Mvc
 
                 Dictionary<string, string> dictionary = new Dictionary<string, string>
                                                             {
-                                                                {"accesstoken", accessToken},
+                                                                {"accesstoken", GetAccessToken()},
                                                                 {"name", currentUser.Name},
                                                                 {"headline", currentUser.Headline},
                                                                 {"summary", currentUser.Summary},
@@ -2109,11 +2112,11 @@ namespace LinkedIn.Mvc
             throw new NotImplementedException();
         }
 
-        private HttpWebResponse GetRequest(string accessToken, UriBuilder location)
+        private HttpWebResponse GetRequest(UriBuilder location)
         {
             var webRequest =
                 WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest),
-                                                   accessToken);
+                                                   GetAccessToken());
 
             HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
             ProcessResponse(webResponse);
@@ -2139,7 +2142,7 @@ namespace LinkedIn.Mvc
         private T GetRequest<T>(Uri location, IEnumerable<HttpHeader> headers = null)
         {
             var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location, HttpDeliveryMethods.GetRequest), GetAccessToken());
-            
+
             if (headers != null)
             {
                 foreach (HttpHeader httpHeader in headers)
@@ -2147,7 +2150,7 @@ namespace LinkedIn.Mvc
                     webRequest.Headers.Add(httpHeader.Name, httpHeader.Value);
                 }
             }
-            
+
             string xmlResponse = ProcessResponse(SendRequest(webRequest));
             return Utilities.DeserializeXml<T>(xmlResponse);
         }
