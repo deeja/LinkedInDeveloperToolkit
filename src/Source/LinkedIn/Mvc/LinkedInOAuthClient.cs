@@ -1,14 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="LinkedInOAuthClient.cs" company="Beemway">
-//     Copyright (c) Beemway. All rights reserved.
-// </copyright>
-// <license>
-//     Microsoft Public License (Ms-PL http://opensource.org/licenses/ms-pl.html).
-//     Contributors may add their own copyright notice above.
-// </license>
-//-----------------------------------------------------------------------
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -34,9 +24,9 @@ namespace LinkedIn.Mvc
     {
         public LinkedInOAuthClient(string consumerKey, string consumerSecret)
             : base("linkedIn service", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
-                                                                     new InMemoryOAuthTokenManager(consumerKey,
-                                                                                                   consumerSecret)))
-        {}
+                                                                     new InMemoryOAuthTokenManager(consumerKey,consumerSecret)))
+        {
+        }
 
         #region Profile API
 
@@ -81,7 +71,7 @@ namespace LinkedIn.Mvc
                 throw new ArgumentException(Resources.ProfileFieldsContainsSitePublicProfileRequest, "profileFields");
             }
 
-            UriBuilder locationBaseUri = BuildApiUrlForCurrentUser(profileType);
+            UriBuilder locationBaseUri = UriUtility.BuildApiUrlForCurrentUser(profileType);
 
             return GetProfile(locationBaseUri, profileFields);
         }
@@ -150,7 +140,7 @@ namespace LinkedIn.Mvc
                                                 string.Format(Resources.NotNullMessageFormat, "profileFields"));
             }
 
-            UriBuilder location = BuildApiUrlByMemberId(memberId);
+            UriBuilder location = UriUtility.BuildApiUrlByMemberId(memberId);
             return GetProfile(location, profileFields);
         }
 
@@ -191,7 +181,7 @@ namespace LinkedIn.Mvc
 
             sb.Length--;
 
-            UriBuilder location = BuildApiUrl(Constants.PeopleResourceName);
+            UriBuilder location = UriUtility.BuildApiUrl(Constants.PeopleResourceName);
             location.Path = string.Format(CultureInfo.InvariantCulture, "{0}::({1})", location.Path, sb);
 
             return GetProfiles(location, new List<ProfileField>());
@@ -293,7 +283,7 @@ namespace LinkedIn.Mvc
                                                                     "modifiedSince"));
             }
 
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
             return GetConnections(location, profileFields, -1, -1, modified, modifiedSince);
         }
 
@@ -308,7 +298,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="Connections" /> object representing the connections. </returns>
         public Connections GetConnectionsForCurrentUser(List<ProfileField> profileFields, int start, int count)
         {
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
             return GetConnections(location, profileFields, start, count, Modified.All, 1);
         }
 
@@ -336,7 +326,7 @@ namespace LinkedIn.Mvc
                                                                     "modifiedSince"));
             }
 
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.ConnectionsResourceName);
             return GetConnections(location, profileFields, start, count, modified, modifiedSince);
         }
 
@@ -451,7 +441,7 @@ namespace LinkedIn.Mvc
                                                                     "modifiedSince"));
             }
 
-            UriBuilder location = BuildApiUrlByMemberId(memberId, Constants.ConnectionsResourceName);
+            UriBuilder location = UriUtility.BuildApiUrlByMemberId(memberId, Constants.ConnectionsResourceName);
             return GetConnections(location, profileFields, start, count, modified, modifiedSince);
         }
 
@@ -749,7 +739,7 @@ namespace LinkedIn.Mvc
                                                      new Resource {Name = Constants.NetworkResourceName},
                                                      new Resource {Name = Constants.UpdatesResourceName}
                                                  };
-            UriBuilder location = BuildApiUrlForCurrentUser(
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(
                 ProfileType.Standard,
                 resources,
                 parameters);
@@ -770,7 +760,7 @@ namespace LinkedIn.Mvc
                                                      new Resource {Name = Constants.NetworkResourceName},
                                                      new Resource {Name = Constants.NetworkStatsResourceName}
                                                  };
-            UriBuilder location = BuildApiUrlForCurrentUser(
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(
                 ProfileType.Standard,
                 resources,
                 null);
@@ -835,7 +825,7 @@ namespace LinkedIn.Mvc
 
             string identifier = string.Format(Constants.NetworkUpdateIdentifierFormat, updateKey);
 
-            UriBuilder location = BuildApiUrlForCurrentUser(new Collection<Resource>
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(new Collection<Resource>
                                                                 {
                                                                     new Resource {Name = Constants.NetworkResourceName},
                                                                     new Resource
@@ -881,7 +871,7 @@ namespace LinkedIn.Mvc
 
             string identifier = string.Format(Constants.NetworkUpdateIdentifierFormat, updateKey);
 
-            UriBuilder location = BuildApiUrlForCurrentUser(new Collection<Resource>
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(new Collection<Resource>
                                                                 {
                                                                     new Resource {Name = Constants.NetworkResourceName},
                                                                     new Resource
@@ -926,7 +916,7 @@ namespace LinkedIn.Mvc
 
             string identifier = string.Format(Constants.NetworkUpdateIdentifierFormat, updateKey);
 
-            UriBuilder location = BuildApiUrlForCurrentUser(new Collection<Resource>
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(new Collection<Resource>
                                                                 {
                                                                     new Resource {Name = Constants.NetworkResourceName},
                                                                     new Resource
@@ -1171,7 +1161,7 @@ namespace LinkedIn.Mvc
                 parameters.Add(Constants.FacetsParam, sb.ToString());
             }
 
-            UriBuilder location = BuildApiUrl(Constants.PeopleSearchResourceName, parameters);
+            UriBuilder location = UriUtility.BuildApiUrl(Constants.PeopleSearchResourceName, parameters);
 
             if (profileFields != null)
             {
@@ -1310,7 +1300,7 @@ namespace LinkedIn.Mvc
                 queryStringParameters.Add(Constants.PostTwitterParam, Boolean.TrueString.ToLowerInvariant());
             }
 
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.SharesResourceName, queryStringParameters);
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.SharesResourceName, queryStringParameters);
             return PostRequest(share, location);
         }
 
@@ -1375,7 +1365,7 @@ namespace LinkedIn.Mvc
                                                        }
                                   };
 
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.SharesResourceName);
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.SharesResourceName);
 
             return PostRequest(reshare, location);
         }
@@ -1597,7 +1587,7 @@ namespace LinkedIn.Mvc
         /// <returns> <b>true</b> if successful; otherwise <b>false</b> . </returns>
         private bool InvitePerson(MailboxItem mailboxItem)
         {
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.MailboxResourceName);
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.MailboxResourceName);
 
             return PostRequest(mailboxItem, location);
         }
@@ -1646,7 +1636,7 @@ namespace LinkedIn.Mvc
             mailboxItem.Subject = subject;
             mailboxItem.Body = body;
 
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.MailboxResourceName);
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.MailboxResourceName);
 
             return PostRequest(mailboxItem, location);
         }
@@ -1680,7 +1670,6 @@ namespace LinkedIn.Mvc
             {
                 throw new ArgumentException(string.Format(Resources.NotEmptyStringMessageFormat, "body"), "body");
             }
-
             if (string.IsNullOrEmpty(cultureName))
             {
                 cultureName = "en-US";
@@ -1690,7 +1679,7 @@ namespace LinkedIn.Mvc
             activity.CultureName = cultureName;
             activity.Body = body;
 
-            UriBuilder location = BuildApiUrlForCurrentUser(Constants.PersonActivitiesResourceName);
+            UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.PersonActivitiesResourceName);
 
             return PostRequest(activity, location);
         }
@@ -1718,289 +1707,6 @@ namespace LinkedIn.Mvc
 
         #region Private methods
 
-        #region BuildApiUrl
-
-        #region BuildApiUrlForCurrentUser
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="profileType"> Indicate the profile type. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(ProfileType profileType)
-        {
-            return BuildApiUrlForCurrentUser(profileType, null, null);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resourceName"> The name of the resource. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(string resourceName)
-        {
-            return BuildApiUrlForCurrentUser(new Resource { Name = resourceName });
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(QueryStringParameters parameters)
-        {
-            return BuildApiUrlForCurrentUser(ProfileType.Standard, null, parameters);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resource"> The API resource. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(Resource resource)
-        {
-            return BuildApiUrlForCurrentUser(resource, null);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resources"> A list of API resources. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(Collection<Resource> resources)
-        {
-            return BuildApiUrlForCurrentUser(ProfileType.Standard, resources, null);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="profileType"> Indicate the profile type. </param>
-        /// <param name="resourceName"> The name of the resource. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(ProfileType profileType, string resourceName)
-        {
-            return BuildApiUrlForCurrentUser(profileType, new Resource { Name = resourceName });
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="profileType"> Indicate the profile type. </param>
-        /// <param name="resource"> The API resource. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(ProfileType profileType, Resource resource)
-        {
-            return BuildApiUrlForCurrentUser(ProfileType.Standard, new Collection<Resource> { resource }, null);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resourceName"> The name of the resource. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(string resourceName, QueryStringParameters parameters)
-        {
-            return BuildApiUrlForCurrentUser(new Resource { Name = resourceName }, parameters);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resource"> The API resource. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(Resource resource, QueryStringParameters parameters)
-        {
-            return BuildApiUrlForCurrentUser(ProfileType.Standard, new Collection<Resource> { resource }, parameters);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="profileType"> Indicate the profile type. </param>
-        /// <param name="resources"> A list of API resources. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForCurrentUser(ProfileType profileType, Collection<Resource> resources,
-                                                     QueryStringParameters parameters)
-        {
-            string identifier = Constants.CurrentUserIdentifier;
-            if (profileType == ProfileType.Public)
-            {
-                identifier = string.Concat(identifier, Constants.PublicProfileIdentifier);
-            }
-
-            return BuildApiUrlForMember(identifier, resources, parameters);
-        }
-
-        #endregion
-
-        #region BuildApiUrlForMember
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="memberId"> The identifier for a member. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlByMemberId(string memberId)
-        {
-            return BuildApiUrlByMemberId(memberId, string.Empty);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="memberId"> The identifier for a member. </param>
-        /// <param name="resourceName"> The name of the resource. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlByMemberId(string memberId, string resourceName)
-        {
-            string identifier = string.Format(CultureInfo.InvariantCulture, Constants.MemberIdIdentifierFormat, memberId);
-
-            return BuildApiUrlForMember(identifier, resourceName, null);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="identifier"> The identifier for a member. </param>
-        /// <param name="resourceName"> The name of the resource. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForMember(string identifier, string resourceName, QueryStringParameters parameters)
-        {
-            return BuildApiUrlForMember(identifier, new Resource { Name = resourceName }, parameters);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="identifier"> The identifier for a member. </param>
-        /// <param name="resource"> The API resource. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForMember(string identifier, Resource resource, QueryStringParameters parameters)
-        {
-            return BuildApiUrl(
-                new Collection<Resource>
-                    {
-                        new Resource {Name = Constants.PeopleResourceName, Identifier = identifier},
-                        resource
-                    },
-                parameters);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="identifier"> The identifier of the member. </param>
-        /// <param name="resources"> A list of API resources. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrlForMember(string identifier, Collection<Resource> resources,
-                                                QueryStringParameters parameters)
-        {
-            if (resources == null)
-            {
-                resources = new Collection<Resource>();
-            }
-
-            resources.Insert(0, new Resource { Name = Constants.PeopleResourceName, Identifier = identifier });
-
-            return BuildApiUrl(resources, parameters);
-        }
-
-        #endregion
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resourceName"> The name of the resource. </param>
-        /// <returns> A <see cref="UriBuilder" /> representing the API url. </returns>
-        private UriBuilder BuildApiUrl(string resourceName)
-        {
-            return BuildApiUrl(new Resource { Name = resourceName });
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resource"> The API resource. </param>
-        /// <returns> A <see cref="UriBuilder" /> representing the API url. </returns>
-        private UriBuilder BuildApiUrl(Resource resource)
-        {
-            return BuildApiUrl(new Collection<Resource> { resource }, null);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resources"> A list of API resources. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrl(Collection<Resource> resources)
-        {
-            return BuildApiUrl(resources, null);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resourceName"> The name of the resource. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrl(string resourceName, QueryStringParameters parameters)
-        {
-            return BuildApiUrl(new Resource { Name = resourceName }, parameters);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resource"> The API resource. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrl(Resource resource, QueryStringParameters parameters)
-        {
-            return BuildApiUrl(new Collection<Resource> { resource }, parameters);
-        }
-
-        /// <summary>
-        ///   Initialize the url of the API.
-        /// </summary>
-        /// <param name="resources"> A list of API resources. </param>
-        /// <param name="parameters"> A list of parameters. </param>
-        /// <returns> A <see cref="UriBuilder" /> object representing the url. </returns>
-        private UriBuilder BuildApiUrl(Collection<Resource> resources, QueryStringParameters parameters)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(Constants.ApiBaseUrl);
-            foreach (Resource resource in resources)
-            {
-                if (string.IsNullOrEmpty(resource.Name) == false)
-                {
-                    sb.Append("/");
-                    sb.Append(resource.Name);
-                    if (string.IsNullOrEmpty(resource.Identifier) == false)
-                    {
-                        sb.Append("/");
-                        sb.Append(resource.Identifier);
-                    }
-                }
-            }
-
-            UriBuilder uri = new UriBuilder(sb.ToString());
-
-            if (parameters != null)
-            {
-                return parameters.AppendToUri(uri);
-            }
-            else
-            {
-                return uri;
-            }
-        }
 
         #endregion
 
@@ -2055,25 +1761,6 @@ namespace LinkedIn.Mvc
             return webResponse;
         }
 
-        /// <summary>
-        ///   Process the API response.
-        /// </summary>
-        /// <param name="webResponse"> The <see cref="WebResponse" /> to process. </param>
-        /// <returns> A xml string returned by the API. </returns>
-        private string ProcessResponse(WebResponse webResponse)
-        {
-            string xmlResponse = string.Empty;
-            using (var streamReader = new StreamReader(webResponse.GetResponseStream()))
-            {
-                xmlResponse = streamReader.ReadToEnd();
-            }
-
-            Utilities.ParseException(xmlResponse);
-            return xmlResponse;
-        }
-
-        #endregion
-
         protected override AuthenticationResult VerifyAuthenticationCore(AuthorizedTokenResponse response)
         {
 
@@ -2119,7 +1806,7 @@ namespace LinkedIn.Mvc
                                                    GetAccessToken());
 
             HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-            ProcessResponse(webResponse);
+            Utilities.ProcessResponse(webResponse);
             return webResponse;
         }
 
@@ -2130,7 +1817,7 @@ namespace LinkedIn.Mvc
                                                                 GetAccessToken());
             webRequest = InitializeRequest(webRequest, item);
             HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
-            ProcessResponse(webResponse);
+            Utilities.ProcessResponse(webResponse);
             return webResponse.StatusCode == HttpStatusCode.Created;
         }
 
@@ -2151,7 +1838,7 @@ namespace LinkedIn.Mvc
                 }
             }
 
-            string xmlResponse = ProcessResponse(SendRequest(webRequest));
+            string xmlResponse = Utilities.ProcessResponse(SendRequest(webRequest));
             return Utilities.DeserializeXml<T>(xmlResponse);
         }
     }
