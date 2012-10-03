@@ -1,5 +1,5 @@
 ﻿using System.Configuration;
-using LinkedIn.Mvc;
+using LinkedIn;
 using Microsoft.Web.WebPages.OAuth;
 
 namespace MvcSample
@@ -14,7 +14,9 @@ namespace MvcSample
             string consumerKey = ConfigurationManager.AppSettings["LinkedInConsumerKey"];
             string consumerSecret = ConfigurationManager.AppSettings["LinkedInConsumerSecret"];
 
-            OAuthWebSecurity.RegisterClient(new LinkedInOAuthClient(consumerKey, consumerSecret), "LinkedIn", null);
+            OAuthWebSecurity.RegisterClient(
+                new LinkedInOAuthClient(consumerKey, consumerSecret, new SessionAccessTokenStorage()), "LinkedIn",
+                null);
         }
     }
 }

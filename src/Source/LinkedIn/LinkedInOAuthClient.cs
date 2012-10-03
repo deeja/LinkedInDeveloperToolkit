@@ -15,17 +15,20 @@ using LinkedIn.Properties;
 using LinkedIn.ServiceEntities;
 using LinkedIn.Utility;
 
-namespace LinkedIn.Mvc
+namespace LinkedIn
 {
     /// <summary>
     ///   A service to access the LinkedIn API's.
     /// </summary>
     public class LinkedInOAuthClient : OAuthClient, ILinkedInService
     {
-        public LinkedInOAuthClient(string consumerKey, string consumerSecret)
+        private readonly IAccessTokenStorage _accessTokenStorage;
+
+        public LinkedInOAuthClient(string consumerKey, string consumerSecret, IAccessTokenStorage accessTokenStorage)
             : base("LinkedInOAuthClient", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
                                                                      new InMemoryOAuthTokenManager(consumerKey,consumerSecret)))
         {
+            _accessTokenStorage = accessTokenStorage;
         }
 
         #region Profile API
@@ -1760,6 +1763,8 @@ namespace LinkedIn.Mvc
 
             try
             {
+                _accessTokenStorage.StoreToken(response.AccessToken);
+
                 Person currentUser = GetCurrentUser(ProfileType.Standard,
                                                     new List<ProfileField>
                                                         {
@@ -1790,7 +1795,7 @@ namespace LinkedIn.Mvc
 
         private string GetAccessToken()
         {
-            throw new NotImplementedException();
+            return _accessTokenStorage.GetToken();
         }
 
         private HttpWebResponse GetRequest(UriBuilder location)
@@ -1823,7 +1828,6 @@ namespace LinkedIn.Mvc
         private T GetRequest<T>(Uri location, IEnumerable<HttpHeader> headers = null)
         {
             var webRequest = WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location, HttpDeliveryMethods.GetRequest), GetAccessToken());
-
             if (headers != null)
             {
                 foreach (HttpHeader httpHeader in headers)

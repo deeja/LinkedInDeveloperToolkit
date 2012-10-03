@@ -106,8 +106,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="IAccessTokenStorage.cs" />
     <Compile Include="ILinkedInService.cs" />
-    <Compile Include="Mvc\LinkedInOAuthClient.cs" />
+    <Compile Include="SessionAccessTokenStorage.cs" />
+    <Compile Include="LinkedInOAuthClient.cs" />
     <Compile Include="ServiceDescriptions.cs" />
     <Compile Include="ServiceEntities\RecommendationType.cs" />
     <Compile Include="Utility\UriBuilder.cs" />

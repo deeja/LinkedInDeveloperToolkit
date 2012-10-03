@@ -6,6 +6,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functional Tests", "Functional Tests", "{3255FDD1-0449-4D43-B265-E7D133542C76}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{4B9083D4-E8A3-4E6B-BDC6-C2FA006123F4}"
+	ProjectSection(SolutionItems) = preProject
+		Source\LinkedIn\Mvc\LinkedInOAuthClient.cs = Source\LinkedIn\Mvc\LinkedInOAuthClient.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{FCF33ED2-0B1C-46A2-9070-A6C4EEC89E97}"
 EndProject
