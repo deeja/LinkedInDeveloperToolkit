@@ -343,9 +343,6 @@ namespace LinkedIn.Mvc
         /// <exception cref="ArgumentException">When
         ///   <paramref name="memberId" />
         ///   is an empty string.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">When
-        ///   <paramref name="modifiedSince" />
-        ///   is not a valid timestamp.</exception>
         public Connections GetConnectionsByMemberId(string memberId)
         {
             return GetConnectionsByMemberId(memberId, null, -1, -1);
@@ -487,9 +484,11 @@ namespace LinkedIn.Mvc
                 location.Path = string.Format(CultureInfo.InvariantCulture, "{0}:({1})", location.Path, listOfFields);
             }
 
-            QueryStringParameters queryStringParameters = new QueryStringParameters();
-            queryStringParameters.Add(Constants.StartParam, start);
-            queryStringParameters.Add(Constants.CountParam, count);
+            QueryStringParameters queryStringParameters = new QueryStringParameters
+                                                              {
+                                                                  {Constants.StartParam, start},
+                                                                  {Constants.CountParam, count}
+                                                              };
             if (modified != Modified.All)
             {
                 queryStringParameters.Add(Constants.ModifiedParam, EnumHelper.GetDescription(modified));
@@ -1447,9 +1446,7 @@ namespace LinkedIn.Mvc
                                                  new Recipient(path)
                                              };
 
-            MailboxItem mailboxItem = new MailboxItem(recipients);
-            mailboxItem.Subject = subject;
-            mailboxItem.Body = body;
+            MailboxItem mailboxItem = new MailboxItem(recipients) {Subject = subject, Body = body};
 
             string headerValue = apiRequest.Headers[0].Value;
             string[] authorizationParams = headerValue.Split(":".ToCharArray());
@@ -1568,13 +1565,14 @@ namespace LinkedIn.Mvc
                                                  new Recipient(path)
                                              };
 
-            MailboxItem mailboxItem = new MailboxItem(recipients);
-            mailboxItem.Subject = subject;
-            mailboxItem.Body = body;
-
-            mailboxItem.ItemContent = new Invitation
+            MailboxItem mailboxItem = new MailboxItem(recipients)
                                           {
-                                              ConnectType = connectionType
+                                              Subject = subject,
+                                              Body = body,
+                                              ItemContent = new Invitation
+                                                                {
+                                                                    ConnectType = connectionType
+                                                                }
                                           };
 
             return InvitePerson(mailboxItem);
@@ -1632,9 +1630,7 @@ namespace LinkedIn.Mvc
                                    });
             }
 
-            MailboxItem mailboxItem = new MailboxItem(recipients);
-            mailboxItem.Subject = subject;
-            mailboxItem.Body = body;
+            MailboxItem mailboxItem = new MailboxItem(recipients) {Subject = subject, Body = body};
 
             UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.MailboxResourceName);
 
@@ -1675,9 +1671,7 @@ namespace LinkedIn.Mvc
                 cultureName = "en-US";
             }
 
-            Activity activity = new Activity();
-            activity.CultureName = cultureName;
-            activity.Body = body;
+            Activity activity = new Activity {CultureName = cultureName, Body = body};
 
             UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.PersonActivitiesResourceName);
 
@@ -1740,7 +1734,7 @@ namespace LinkedIn.Mvc
         /// <returns> A <see cref="WebResponse" /> object representing the API response. </returns>
         private WebResponse SendRequest(WebRequest webRequest)
         {
-            HttpWebResponse webResponse = null;
+            HttpWebResponse webResponse;
             try
             {
                 webResponse = (HttpWebResponse)webRequest.GetResponse();
