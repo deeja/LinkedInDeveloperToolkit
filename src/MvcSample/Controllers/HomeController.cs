@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using DotNetOpenAuth.Messaging;
 using LinkedIn;
 using LinkedIn.ServiceEntities;
 using WebMatrix.WebData;
@@ -28,10 +29,14 @@ namespace MvcSample.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            var authenticated = User.Identity.IsAuthenticated;
+            ViewBag.Message = authenticated ?  "You are authenticated" : "Please Login";
+            ViewBag.Authenticated = authenticated;
 
-            if (User.Identity.IsAuthenticated)
+            if (authenticated)
             {
+                // Example errors are handled below. This "catching" should be moved so it can be used 
+                // application wide.
                 try
                 {
                     var person = LinkedInService.GetCurrentUser(ProfileType.Standard,
@@ -49,24 +54,17 @@ namespace MvcSample.Controllers
                 }
                 catch (AccessTokenNotFoundException accessTokenNotFound)
                 {
+                    /* When the IAccessTokenStorage can't find the key */ 
+                    FormsAuthentication.SignOut();
+                    return RedirectToAction("Index");
+                }
+                catch (ProtocolException protocolException) 
+                {
+                    /* When the IOAuthTokenManager can't find the key */ 
                     FormsAuthentication.SignOut();
                     return RedirectToAction("Index");
                 }
             }
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }

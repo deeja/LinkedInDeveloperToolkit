@@ -1,3 +1,4 @@
+using System;
 using System.Web;
 
 namespace LinkedIn
@@ -17,7 +18,8 @@ namespace LinkedIn
         {
             HttpCookie cookie = new HttpCookie(CookieName)
                                      {
-                                         Value = Encrypt(token)
+                                         Value = Encrypt(token),
+                                         Expires = DateTime.Now.AddYears(1)
                                      };
 
             HttpContext.Current.Response.Cookies.Set(cookie);

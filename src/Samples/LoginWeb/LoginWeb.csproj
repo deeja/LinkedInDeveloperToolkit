@@ -106,12 +106,6 @@
     <Content Include="Secure\Profile.aspx" />
     <Content Include="Secure\UpdateStatus.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.designer.cs">

@@ -103,12 +103,6 @@
     <Content Include="Profile.aspx" />
     <Content Include="UpdateStatus.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\InMemoryTokenManager.cs" />
