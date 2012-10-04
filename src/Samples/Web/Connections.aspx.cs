@@ -27,7 +27,7 @@ public partial class _Connections : LinkedInBasePage
 {
   protected void Page_Load(object sender, EventArgs e)
   {
-    LinkedInService service = new LinkedInService(base.Authorization);
+    ILinkedInService service = _linkedInService;
 
     connectionsDataList.DataSource = service.GetConnectionsForCurrentUser().Items;
     connectionsDataList.DataBind();

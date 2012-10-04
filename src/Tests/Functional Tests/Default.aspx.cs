@@ -10,7 +10,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-
+using FunctionalTests;
 using LinkedIn;
 using LinkedIn.Utility;
 using LinkedIn.ServiceEntities;
@@ -19,11 +19,9 @@ public partial class Default : LinkedInBasePage
 {
   protected void Page_Load(object sender, EventArgs e)
   {
-    LinkedInService service = new LinkedInService(base.Authorization);
-    
     try
     {
-      Person currentUser= service.GetCurrentUser(ProfileType.Standard);
+      Person currentUser= _linkedInService.GetCurrentUser(ProfileType.Standard);
 
       console.Text += currentUser.Name;
     }

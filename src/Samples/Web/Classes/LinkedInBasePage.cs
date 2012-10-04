@@ -18,7 +18,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Xml.Linq;
-
+using Classes;
 using LinkedIn;
 
 /// <summary>
@@ -26,58 +26,11 @@ using LinkedIn;
 /// </summary>
 public class LinkedInBasePage : System.Web.UI.Page
 {
-  private string AccessToken
-  {
-    get { return (string)Session["AccessToken"]; }
-    set { Session["AccessToken"] = value; }
-  }
 
-  private InMemoryTokenManager TokenManager
-  {
-    get
+    protected static ILinkedInService _linkedInService = ServiceLookup.GetLinkedInService();
+
+
+    protected override void OnLoad(EventArgs e)
     {
-      var tokenManager = (InMemoryTokenManager)Application["TokenManager"];
-      if (tokenManager == null)
-      {
-        string consumerKey = ConfigurationManager.AppSettings["LinkedInConsumerKey"];
-        string consumerSecret = ConfigurationManager.AppSettings["LinkedInConsumerSecret"];
-        if (string.IsNullOrEmpty(consumerKey) == false)
-        {
-          tokenManager = new InMemoryTokenManager(consumerKey, consumerSecret);
-          Application["TokenManager"] = tokenManager;
-        }
-      }
-
-      return tokenManager;
     }
-  }
-
-  protected WebOAuthAuthorization Authorization
-  {
-    get;
-    private set;
-  }
-
-  protected override void OnLoad(EventArgs e)
-  {
-    this.Authorization = new WebOAuthAuthorization(this.TokenManager, this.AccessToken);
-
-    if (!IsPostBack)
-    {
-      string accessToken = this.Authorization.CompleteAuthorize();
-      if (accessToken != null)
-      {
-        this.AccessToken = accessToken;
-
-        Response.Redirect(Request.Path);
-      }
-
-      if (AccessToken == null)
-      {
-        this.Authorization.BeginAuthorize();
-      }
-    }
-
-    base.OnLoad(e);
-  }
 }

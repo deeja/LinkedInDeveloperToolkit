@@ -69,7 +69,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.2.12274\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Membership.OpenAuth">
+      <HintPath>..\..\packages\Microsoft.AspNet.Membership.OpenAuth.1.0.0\lib\net40\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
     </Reference>
@@ -93,11 +101,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Code\Constants.cs" />
-    <Compile Include="App_Code\InMemoryTokenManager.cs" />
-    <Compile Include="App_Code\LinkedInBasePage.cs">
+    <Compile Include="Classes\Constants.cs" />
+    <Compile Include="Classes\LinkedInBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="Classes\ServiceLookup.cs" />
     <Compile Include="CommentOnNetworkUpdate.aspx.cs">
       <DependentUpon>CommentOnNetworkUpdate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -27,7 +27,7 @@ public partial class _Profile : LinkedInBasePage
 {
   protected void Page_Load(object sender, EventArgs e)
   {
-    LinkedInService service = new LinkedInService(base.Authorization);
+    ILinkedInService service = _linkedInService;
 
     List<ProfileField> fields = new List<ProfileField>();
     fields.Add(ProfileField.PersonId);

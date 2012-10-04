@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using FunctionalTests;
 using LinkedIn;
 using LinkedIn.ServiceEntities;
 using LinkedIn.Utility;
@@ -14,7 +14,7 @@ public partial class InvitePersonByEmailAddress : LinkedInBasePage
 
   protected void sendButton_Click(object sender, EventArgs e)
   {
-    LinkedInService service = new LinkedInService(base.Authorization);
+    ILinkedInService service = _linkedInService;
 
     try
     {

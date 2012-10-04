@@ -11,7 +11,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Xml.Linq;
-
+using FunctionalTests;
 using LinkedIn;
 using LinkedIn.Utility;
 using LinkedIn.ServiceEntities;
@@ -25,7 +25,7 @@ public partial class PostNetworkUpdate : LinkedInBasePage
 
   protected void sendButton_Click(object sender, EventArgs e)
   {
-    LinkedInService service = new LinkedInService(base.Authorization);
+    ILinkedInService service = _linkedInService;
 
     try
     {

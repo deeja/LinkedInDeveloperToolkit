@@ -115,8 +115,6 @@
     <Compile Include="ServiceDescriptions.cs" />
     <Compile Include="ServiceEntities\RecommendationType.cs" />
     <Compile Include="Utility\UriBuilder.cs" />
-    <Compile Include="WebOAuthAuthentication.cs" />
-    <Compile Include="DesktopOAuthAuthorization.cs" />
     <Compile Include="Enum\ProfileType.cs" />
     <Compile Include="FieldSelectorConverters\BucketFieldSelectorConverter.cs" />
     <Compile Include="FieldSelectorConverters\MemberUrlFieldSelectorConverter.cs" />
@@ -131,8 +129,6 @@
     <Compile Include="FieldSelectorConverters\LocationFieldSelectorConverter.cs" />
     <Compile Include="FieldSelectorConverters\IFieldSelectorConverter.cs" />
     <Compile Include="FieldSelectorConverters\PeopleFieldSelectorConverter.cs" />
-    <Compile Include="ILinkedInAuthorization.cs" />
-    <Compile Include="OAuthAuthorization.cs" />
     <Compile Include="QueryStringParameters.cs" />
     <Compile Include="Resource.cs" />
     <Compile Include="ServiceEntities\Activity.cs" />
@@ -176,7 +172,6 @@
     <Compile Include="ServiceEntities\NetworkUpdateType.cs" />
     <Compile Include="ServiceEntities\Recipient.cs" />
     <Compile Include="ServiceEntities\MailboxItem.cs" />
-    <Compile Include="LinkedInService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -210,7 +205,6 @@
     <Compile Include="Utility\EnumHelper.cs" />
     <Compile Include="Utility\LinkedInException.cs" />
     <Compile Include="Utility\Utilities.cs" />
-    <Compile Include="WebOAuthAuthorization.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -236,6 +230,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="LinkedIn.csproj.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

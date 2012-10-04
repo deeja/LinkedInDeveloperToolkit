@@ -1,5 +1,5 @@
 ﻿using System;
-
+using FunctionalTests;
 using LinkedIn;
 using LinkedIn.ServiceEntities;
 using LinkedIn.Utility;
@@ -12,7 +12,7 @@ public partial class GetNetworkUpdatesSHAR : LinkedInBasePage
 
   protected void executeButton_Click(object sender, EventArgs e)
   {
-    LinkedInService service = new LinkedInService(base.Authorization);
+    ILinkedInService service = _linkedInService;
     
     try
     {

@@ -12,11 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net;
-using System.Web;
-
-using LinkedIn;
 using LinkedIn.ServiceEntities;
-using LinkedIn.Tests.Mocks;
 using LinkedIn.Utility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

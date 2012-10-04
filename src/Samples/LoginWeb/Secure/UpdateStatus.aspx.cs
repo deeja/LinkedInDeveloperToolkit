@@ -38,7 +38,7 @@ public partial class _UpdateStatus : LinkedInBasePage
   {
     try
     {
-      LinkedInService service = new LinkedInService(base.Authorization);
+      ILinkedInService service = _linkedInService;
 
       service.CreateShare(statusTextBox.Text, VisibilityCode.ConnectionsOnly);
 
@@ -57,7 +57,7 @@ public partial class _UpdateStatus : LinkedInBasePage
 
   private void ShowCurrentStatus()
   {
-    LinkedInService service = new LinkedInService(base.Authorization);
+    ILinkedInService service = _linkedInService;
 
     List<ProfileField> fields = new List<ProfileField>();
     fields.Add(ProfileField.PersonId);
