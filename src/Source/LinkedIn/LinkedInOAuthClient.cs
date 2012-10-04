@@ -25,8 +25,9 @@ namespace LinkedIn
     {
         private readonly IAccessTokenStorage _accessTokenStorage;
 
-        public LinkedInOAuthClient(IAccessTokenStorage accessTokenStorage,  IOAuthWebWorker webWorker
-            ) : base("LinkedInOAuthClient", webWorker)
+        public LinkedInOAuthClient(IAccessTokenStorage accessTokenStorage, IOAuthWebWorker webWorker
+            )
+            : base("LinkedInOAuthClient", webWorker)
         {
             _accessTokenStorage = accessTokenStorage;
         }
@@ -1449,7 +1450,7 @@ namespace LinkedIn
                                                  new Recipient(path)
                                              };
 
-            MailboxItem mailboxItem = new MailboxItem(recipients) {Subject = subject, Body = body};
+            MailboxItem mailboxItem = new MailboxItem(recipients) { Subject = subject, Body = body };
 
             string headerValue = apiRequest.Headers[0].Value;
             string[] authorizationParams = headerValue.Split(":".ToCharArray());
@@ -1633,7 +1634,7 @@ namespace LinkedIn
                                    });
             }
 
-            MailboxItem mailboxItem = new MailboxItem(recipients) {Subject = subject, Body = body};
+            MailboxItem mailboxItem = new MailboxItem(recipients) { Subject = subject, Body = body };
 
             UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.MailboxResourceName);
 
@@ -1674,7 +1675,7 @@ namespace LinkedIn
                 cultureName = "en-US";
             }
 
-            Activity activity = new Activity {CultureName = cultureName, Body = body};
+            Activity activity = new Activity { CultureName = cultureName, Body = body };
 
             UriBuilder location = UriUtility.BuildApiUrlForCurrentUser(Constants.PersonActivitiesResourceName);
 
@@ -1802,13 +1803,16 @@ namespace LinkedIn
 
         private HttpWebResponse GetRequest(UriBuilder location)
         {
+
             var webRequest =
-                WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest),
-                                                   GetAccessToken());
+                   WebWorker.PrepareAuthorizedRequest(new MessageReceivingEndpoint(location.Uri, HttpDeliveryMethods.GetRequest),
+                                                      GetAccessToken());
 
             HttpWebResponse webResponse = (HttpWebResponse)SendRequest(webRequest);
             Utilities.ProcessResponse(webResponse);
             return webResponse;
+
+
         }
 
         private bool PostRequest<T>(T item, UriBuilder location,

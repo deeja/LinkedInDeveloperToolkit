@@ -30,13 +30,6 @@ namespace MvcSample
         }
 
 
-        protected void Application_Error()
-        {
-            Exception lastError = Server.GetLastError();
-            if ( lastError is AccessTokenNotFoundException)
-            {
-                WebSecurity.Logout();
-            }
-        }
+      
     }
 }

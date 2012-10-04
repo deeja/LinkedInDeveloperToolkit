@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="AccessTokenNotFoundException.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Crypto.cs" />
     <Compile Include="IAccessTokenStorage.cs" />
     <Compile Include="ILinkedInService.cs" />
     <Compile Include="CookieAccessTokenStorage.cs" />

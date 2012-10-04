@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using LinkedIn;
 using LinkedIn.ServiceEntities;
+using WebMatrix.WebData;
 
 namespace MvcSample.Controllers
 {
@@ -30,8 +32,10 @@ namespace MvcSample.Controllers
 
             if (User.Identity.IsAuthenticated)
             {
-                var person = LinkedInService.GetCurrentUser(ProfileType.Standard,
-                                                            new List<ProfileField>
+                try
+                {
+                    var person = LinkedInService.GetCurrentUser(ProfileType.Standard,
+                                                                      new List<ProfileField>
                                                                 {
                                                                     ProfileField.PersonId,
                                                                     ProfileField.FirstName,
@@ -39,9 +43,15 @@ namespace MvcSample.Controllers
                                                                     ProfileField.PictureUrl
                                                                 });
 
-                ViewBag.Id = person.Id;
-                ViewBag.Image = person.PictureUrl;
-                ViewBag.Name = person.Name;
+                    ViewBag.Id = person.Id;
+                    ViewBag.Image = person.PictureUrl;
+                    ViewBag.Name = person.Name;
+                }
+                catch (AccessTokenNotFoundException accessTokenNotFound)
+                {
+                    FormsAuthentication.SignOut();
+                    return RedirectToAction("Index");
+                }
             }
 
             return View();
