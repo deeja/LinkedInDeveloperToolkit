@@ -1,25 +1,34 @@
 <?xml version="1.0" encoding="utf-16"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>LinkedInDeveloperTookit</id>
-        <version>2.0.0.1</version>
-        <title>LinkedIn Developer Tookit</title>
+        <id>AspNetLinkedInToolkit</id>
+        <version>4.0.0.1</version>
+        <title>LinkedIn OAuth API for ASP.Net</title> 
+		<description>Specifically for ASP.Net using the DotNetOpenAuth framework. 
+		IoC friendly. 
+		
+		LinkedInOAuthClient client = new LinkedInOAuthClient(...);
+		OAuthWebSecurity.RegisterClient(linkedInOAuthClient, "LinkedIn", null);
+		
+		... after login ...
+		
+		Person me = client.GetCurrentUser();
+		var id = me.PersonId;		
+		
+		Samples: https://github.com/deeja/LinkedInDeveloperToolkit			
+</description>
         <authors>Beemway, Deeja</authors>
         <owners>Deeja</owners>
         <licenseUrl>https://raw.github.com/deeja/LinkedInDeveloperToolkit/master/License.txt</licenseUrl>
         <projectUrl>https://github.com/deeja/LinkedInDeveloperToolkit</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>LinkedIn API toolkit 
-Majority of the LinkedIn API has been implemented.
-Sample and examples can be found at https://github.com/deeja/LinkedInDeveloperToolkit
-
-</description>
-        <summary>LinkedIn API toolkit (Cloned from Codeplex)</summary>
+        <summary>LinkedIn API toolkit for ASP.Net using OAuth via the DotNetAuth libraries</summary>
         <releaseNotes>
 		2.0.0.1 - Contains Significant Breaking Changes
 		- Added an interface: ILinkedInService
 		- Added an Asp.Net OAuthClient / IAuthenticationClient LinkedInOAuthClient that implements ILinkedInService
-		- Removed two obsolete Methods (DeleteStatus and UpdateStatus)			
+		- Removed two obsolete Methods (DeleteStatus and UpdateStatus)	
+		- Removed Desktop references 	
 		
 		1.0.0.0 
 		- Effectively a tidied up release of the code originally from Codeplex. 
@@ -27,7 +36,7 @@ Sample and examples can be found at https://github.com/deeja/LinkedInDeveloperTo
 This project has been uploaded to GitHub.
 Any Issues, report them to https://github.com/deeja/LinkedInDeveloperToolkit</releaseNotes>
         <copyright />
-        <tags>LinkedIn, API</tags>
+        <tags>LinkedIn, API, ASP.Net, OAuth, DotNetOpenAuth</tags>
         <dependencies>
             <dependency id="DotNetOpenAuth.AspNet" version="4.1.2.12274" />
         </dependencies>
