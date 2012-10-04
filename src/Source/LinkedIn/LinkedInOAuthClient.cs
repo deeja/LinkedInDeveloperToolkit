@@ -9,7 +9,6 @@ using System.Text;
 using DotNetOpenAuth.AspNet;
 using DotNetOpenAuth.AspNet.Clients;
 using DotNetOpenAuth.Messaging;
-using DotNetOpenAuth.OAuth;
 using DotNetOpenAuth.OAuth.Messages;
 using LinkedIn.FieldSelectorConverters;
 using LinkedIn.Properties;

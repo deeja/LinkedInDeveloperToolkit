@@ -15,26 +15,15 @@ namespace LinkedIn
 
         public void StoreToken(string token)
         {
-            PersistValue(token);
-        }
-
-        private void PersistValue(string value)
-        {
             HttpCookie cookie = new HttpCookie(CookieName)
-                                    {
-                                        Value = Encrypt(value)
-                                    };
+                                     {
+                                         Value = Encrypt(token)
+                                     };
 
             HttpContext.Current.Response.Cookies.Set(cookie);
         }
 
-        private string RetrieveValue()
-        {
-            HttpCookie httpCookie = HttpContext.Current.Request.Cookies[CookieName];
-            if (httpCookie == null) return null;
-            return Decrypt(httpCookie.Value);
-        }
-
+     
         private string Encrypt(string value)
         {
             return Crypto.EncryptStringAES(value, SharedSecret);
@@ -48,7 +37,13 @@ namespace LinkedIn
 
         public string GetToken()
         {
-            string tokenString = RetrieveValue();
+            HttpCookie httpCookie = HttpContext.Current.Request.Cookies[CookieName];
+            if (httpCookie == null)
+            {
+                throw new AccessTokenNotFoundException();
+            }
+
+            var tokenString =  Decrypt(httpCookie.Value);
 
             if (string.IsNullOrWhiteSpace(tokenString))
             {
