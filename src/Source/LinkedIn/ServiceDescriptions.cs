@@ -6,7 +6,7 @@ using DotNetOpenAuth.OAuth.ChannelElements;
 
 namespace LinkedIn
 {
-    internal static class ServiceDescriptions
+    public static class ServiceDescriptions
     {
         /// <summary>
         /// The description of LinkedIn's OAuth protocol URIs.

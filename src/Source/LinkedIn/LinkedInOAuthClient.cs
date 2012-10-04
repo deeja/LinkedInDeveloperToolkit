@@ -9,6 +9,7 @@ using System.Text;
 using DotNetOpenAuth.AspNet;
 using DotNetOpenAuth.AspNet.Clients;
 using DotNetOpenAuth.Messaging;
+using DotNetOpenAuth.OAuth;
 using DotNetOpenAuth.OAuth.Messages;
 using LinkedIn.FieldSelectorConverters;
 using LinkedIn.Properties;
@@ -24,9 +25,8 @@ namespace LinkedIn
     {
         private readonly IAccessTokenStorage _accessTokenStorage;
 
-        public LinkedInOAuthClient(string consumerKey, string consumerSecret, IAccessTokenStorage accessTokenStorage)
-            : base("LinkedInOAuthClient", new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
-                                                                     new InMemoryOAuthTokenManager(consumerKey,consumerSecret)))
+        public LinkedInOAuthClient(IAccessTokenStorage accessTokenStorage,  IOAuthWebWorker webWorker
+            ) : base("LinkedInOAuthClient", webWorker)
         {
             _accessTokenStorage = accessTokenStorage;
         }
@@ -1795,7 +1795,9 @@ namespace LinkedIn
 
         private string GetAccessToken()
         {
-            return _accessTokenStorage.GetToken();
+            string token = _accessTokenStorage.GetToken();
+
+            return token;
         }
 
         private HttpWebResponse GetRequest(UriBuilder location)

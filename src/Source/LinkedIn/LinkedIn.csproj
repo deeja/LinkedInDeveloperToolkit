@@ -105,10 +105,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessTokenNotFoundException.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="IAccessTokenStorage.cs" />
     <Compile Include="ILinkedInService.cs" />
-    <Compile Include="SessionAccessTokenStorage.cs" />
+    <Compile Include="CookieAccessTokenStorage.cs" />
     <Compile Include="LinkedInOAuthClient.cs" />
     <Compile Include="ServiceDescriptions.cs" />
     <Compile Include="ServiceEntities\RecommendationType.cs" />
