@@ -456,6 +456,16 @@ namespace LinkedIn.ServiceEntities
       get;
       set;
     }
+
+    /// <summary>
+    /// Gets or sets the email address for the profile.
+    /// </summary>
+    [XmlElement("email-address")]
+    public string EmailAddress
+    {
+        get;
+        set;
+    }
     #endregion
   }
 }

@@ -14,6 +14,7 @@ using LinkedIn.FieldSelectorConverters;
 using LinkedIn.Properties;
 using LinkedIn.ServiceEntities;
 using LinkedIn.Utility;
+using System.Reflection;
 
 namespace LinkedIn
 {
@@ -23,6 +24,8 @@ namespace LinkedIn
     public class LinkedInOAuthClient : OAuthClient, ILinkedInService
     {
         private readonly IAccessTokenStorage _accessTokenStorage;
+
+        private readonly IDictionary<string, ProfileField> _extraAuthDataFields = new Dictionary<string, ProfileField>(StringComparer.OrdinalIgnoreCase);
 
         public LinkedInOAuthClient(IAccessTokenStorage accessTokenStorage, IOAuthWebWorker webWorker
             )
@@ -1702,6 +1705,21 @@ namespace LinkedIn
 
         #endregion
 
+        #region Extra Auth Data Fields
+
+        /// <summary>
+        /// Requests the given <paramref name="field"/> during authentication, such as email address,
+        /// and returns the value in the extraData dictionary with the given <paramref name="key"/>.
+        /// </summary>
+        /// <param name="key">The key to use when storing the return value in the extraData dictionary.</param>
+        /// <param name="field">The extra field requested.</param>
+        public void RequestExtraAuthData(string key, ProfileField field)
+        {
+            _extraAuthDataFields[key] = field;
+        }
+
+        #endregion
+
         #region Private methods
 
 
@@ -1765,16 +1783,19 @@ namespace LinkedIn
             {
                 _accessTokenStorage.StoreToken(response.AccessToken);
 
-                Person currentUser = GetCurrentUser(ProfileType.Standard,
-                                                    new List<ProfileField>
-                                                        {
-                                                            ProfileField.Summary,
-                                                            ProfileField.Industry,
-                                                            ProfileField.Headline,
-                                                            ProfileField.PersonId,
-                                                            ProfileField.LastName,
-                                                            ProfileField.FirstName
-                                                        });
+                var requestedFields = new HashSet<ProfileField>
+                {
+                    ProfileField.Summary,
+                    ProfileField.Industry,
+                    ProfileField.Headline,
+                    ProfileField.PersonId,
+                    ProfileField.LastName,
+                    ProfileField.FirstName
+                };
+
+                requestedFields.UnionWith(_extraAuthDataFields.Values);
+
+                Person currentUser = GetCurrentUser(ProfileType.Standard, requestedFields.ToList());
                 var providerUserId = currentUser.Id;
 
                 Dictionary<string, string> dictionary = new Dictionary<string, string>
@@ -1785,11 +1806,30 @@ namespace LinkedIn
                                                                 {"summary", currentUser.Summary},
                                                                 {"industry", currentUser.Industry}
                                                             };
+
+                PopulateExtraAuthDataValues(dictionary, currentUser);
+
                 return new AuthenticationResult(true, ProviderName, providerUserId, currentUser.Name, dictionary);
             }
             catch (Exception ex)
             {
                 return new AuthenticationResult(ex);
+            }
+        }
+
+        private void PopulateExtraAuthDataValues(IDictionary<string, string> dictionary, Person currentUser)
+        {
+            foreach (var field in _extraAuthDataFields)
+            {
+                var prop = typeof(Person).GetProperty(field.Value.ToString(), BindingFlags.Public | BindingFlags.Instance);
+
+                if (prop == null)
+                    continue;
+
+                var value = prop.GetValue(currentUser, null);
+
+                if (value != null)
+                    dictionary[field.Key] = value.ToString();
             }
         }
 

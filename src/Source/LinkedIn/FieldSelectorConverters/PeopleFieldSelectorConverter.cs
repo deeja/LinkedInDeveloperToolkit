@@ -76,7 +76,8 @@ namespace LinkedIn.FieldSelectorConverters
         profileField == ProfileField.SiteStandardProfileRequestUrl ||
         profileField == ProfileField.ApiPublicProfileRequestUrl ||
         profileField == ProfileField.SitePublicProfileRequestUrl ||
-        profileField == ProfileField.PublicProfileUrl;
+        profileField == ProfileField.PublicProfileUrl ||
+        profileField == ProfileField.EmailAddress;
     }
   }
 }
