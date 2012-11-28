@@ -197,6 +197,12 @@ namespace LinkedIn.ServiceEntities
     /// </summary>
     [Description("current-share")]
     CurrentShare = 29,
+
+    /// <summary>
+    /// The email address of the member.
+    /// </summary>
+    [Description("email-address")]
+    EmailAddress = 30,
     
     /// <summary>
     /// The generic name of a location.
