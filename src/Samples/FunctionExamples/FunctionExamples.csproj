@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3844C22F-E4A5-4E73-AE17-50F33CF5DB0E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FunctionExamples</RootNamespace>
+    <AssemblyName>FunctionExamples</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\DotNetOpenAuth.AspNet.4.1.2.12274\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\DotNetOpenAuth.Core.4.1.2.12274\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\DotNetOpenAuth.OAuth.Core.4.1.2.12274\lib\net45-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.2.12274\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\DotNetOpenAuth.OpenId.Core.4.1.2.12274\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.2.12274\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Membership.OpenAuth">
+      <HintPath>..\..\packages\Microsoft.AspNet.Membership.OpenAuth.1.0.0\lib\net45\Microsoft.AspNet.Membership.OpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CommentOnNetworkUpdate.aspx" />
+    <Content Include="CreateReShare.aspx" />
+    <Content Include="CreateShare.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="DeleteStatus.aspx" />
+    <Content Include="GetConnections.aspx" />
+    <Content Include="GetConnectionsFull.aspx" />
+    <Content Include="GetCurrentUserFull.aspx" />
+    <Content Include="GetModifiedConnections.aspx" />
+    <Content Include="GetNetworkStatistics.aspx" />
+    <Content Include="GetNetworkUpdates.aspx" />
+    <Content Include="GetNetworkUpdatesANSW.aspx" />
+    <Content Include="GetNetworkUpdatesAPPS.aspx" />
+    <Content Include="GetNetworkUpdatesCONN.aspx" />
+    <Content Include="GetNetworkUpdatesJGRP.aspx" />
+    <Content Include="GetNetworkUpdatesJOBS.aspx" />
+    <Content Include="GetNetworkUpdatesMultiple.aspx" />
+    <Content Include="GetNetworkUpdatesPICT.aspx" />
+    <Content Include="GetNetworkUpdatesQSTN.aspx" />
+    <Content Include="GetNetworkUpdatesRECU.aspx" />
+    <Content Include="GetNetworkUpdatesSHAR.aspx" />
+    <Content Include="GetOutOfNetworkProfile.aspx" />
+    <Content Include="GetProfileByMemberId.aspx" />
+    <Content Include="GetProfilesByMemberIds.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="InvalidateToken.aspx" />
+    <Content Include="InvitePersonByEmailAddress.aspx" />
+    <Content Include="LikeNetworkUpdate.aspx" />
+    <Content Include="PostNetworkUpdate.aspx" />
+    <Content Include="Search.aspx" />
+    <Content Include="SendMessage.aspx" />
+    <Content Include="UnlikeNetworkUpdate.aspx" />
+    <Content Include="UpdateStatus.aspx" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="Classes\Constants.cs" />
+    <Compile Include="Classes\LinkedInBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Classes\ServiceLookup.cs" />
+    <Compile Include="CommentOnNetworkUpdate.aspx.cs">
+      <DependentUpon>CommentOnNetworkUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CommentOnNetworkUpdate.aspx.designer.cs">
+      <DependentUpon>CommentOnNetworkUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateReShare.aspx.cs">
+      <DependentUpon>CreateReShare.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateReShare.aspx.designer.cs">
+      <DependentUpon>CreateReShare.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateShare.aspx.cs">
+      <DependentUpon>CreateShare.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateShare.aspx.designer.cs">
+      <DependentUpon>CreateShare.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.master.cs">
+      <DependentUpon>Default.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.master.designer.cs">
+      <DependentUpon>Default.master</DependentUpon>
+    </Compile>
+    <Compile Include="DeleteStatus.aspx.cs">
+      <DependentUpon>DeleteStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DeleteStatus.aspx.designer.cs">
+      <DependentUpon>DeleteStatus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetConnections.aspx.cs">
+      <DependentUpon>GetConnections.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetConnections.aspx.designer.cs">
+      <DependentUpon>GetConnections.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetConnectionsFull.aspx.cs">
+      <DependentUpon>GetConnectionsFull.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetConnectionsFull.aspx.designer.cs">
+      <DependentUpon>GetConnectionsFull.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetCurrentUserFull.aspx.cs">
+      <DependentUpon>GetCurrentUserFull.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetCurrentUserFull.aspx.designer.cs">
+      <DependentUpon>GetCurrentUserFull.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetModifiedConnections.aspx.cs">
+      <DependentUpon>GetModifiedConnections.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetModifiedConnections.aspx.designer.cs">
+      <DependentUpon>GetModifiedConnections.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkStatistics.aspx.cs">
+      <DependentUpon>GetNetworkStatistics.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkStatistics.aspx.designer.cs">
+      <DependentUpon>GetNetworkStatistics.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdates.aspx.cs">
+      <DependentUpon>GetNetworkUpdates.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdates.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdates.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesANSW.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesANSW.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesANSW.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesANSW.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesAPPS.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesAPPS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesAPPS.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesAPPS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesCONN.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesCONN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesCONN.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesCONN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesJGRP.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesJGRP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesJGRP.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesJGRP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesJOBS.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesJOBS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesJOBS.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesJOBS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesMultiple.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesMultiple.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesMultiple.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesMultiple.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesPICT.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesPICT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesPICT.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesPICT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesQSTN.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesQSTN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesQSTN.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesQSTN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesRECU.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesRECU.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesRECU.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesRECU.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesSHAR.aspx.cs">
+      <DependentUpon>GetNetworkUpdatesSHAR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetNetworkUpdatesSHAR.aspx.designer.cs">
+      <DependentUpon>GetNetworkUpdatesSHAR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetOutOfNetworkProfile.aspx.cs">
+      <DependentUpon>GetOutOfNetworkProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetOutOfNetworkProfile.aspx.designer.cs">
+      <DependentUpon>GetOutOfNetworkProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetProfileByMemberId.aspx.cs">
+      <DependentUpon>GetProfileByMemberId.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetProfileByMemberId.aspx.designer.cs">
+      <DependentUpon>GetProfileByMemberId.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetProfilesByMemberIds.aspx.cs">
+      <DependentUpon>GetProfilesByMemberIds.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetProfilesByMemberIds.aspx.designer.cs">
+      <DependentUpon>GetProfilesByMemberIds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="InvalidateToken.aspx.cs">
+      <DependentUpon>InvalidateToken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvalidateToken.aspx.designer.cs">
+      <DependentUpon>InvalidateToken.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InvitePersonByEmailAddress.aspx.cs">
+      <DependentUpon>InvitePersonByEmailAddress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InvitePersonByEmailAddress.aspx.designer.cs">
+      <DependentUpon>InvitePersonByEmailAddress.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LikeNetworkUpdate.aspx.cs">
+      <DependentUpon>LikeNetworkUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LikeNetworkUpdate.aspx.designer.cs">
+      <DependentUpon>LikeNetworkUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PostNetworkUpdate.aspx.cs">
+      <DependentUpon>PostNetworkUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PostNetworkUpdate.aspx.designer.cs">
+      <DependentUpon>PostNetworkUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SendMessage.aspx.cs">
+      <DependentUpon>SendMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SendMessage.aspx.designer.cs">
+      <DependentUpon>SendMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UnlikeNetworkUpdate.aspx.cs">
+      <DependentUpon>UnlikeNetworkUpdate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UnlikeNetworkUpdate.aspx.designer.cs">
+      <DependentUpon>UnlikeNetworkUpdate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateStatus.aspx.cs">
+      <DependentUpon>UpdateStatus.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UpdateStatus.aspx.designer.cs">
+      <DependentUpon>UpdateStatus.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.master" />
+    <Content Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Source\LinkedIn\LinkedIn.csproj">
+      <Project>{4e4c3e30-a7b4-4e85-9298-48111df255e7}</Project>
+      <Name>LinkedIn</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>64316</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:55048/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
