@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-16"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>LinkedInOAuthApi</id>
-        <version>0.3.2-pre</version>
+        <version>0.3.3-pre</version>
         <title>LinkedIn OAuth API for ASP.Net</title> 
 		<description>Specifically for ASP.Net using the DotNetOpenAuth framework. 
 		IoC friendly using ILinkedInService interface. 
@@ -30,6 +30,9 @@
         <releaseNotes>
 		0.3 - Updates to the DotNetOpenAuth.AspNet Version
 		 - Added static method: LinkedInOAuthClient.CreateCookieBasedClient(key,secret,service description)
+		 - Changed the ServiceDescriptions to useful names, removing a bit of redundant code
+		 - LinkedInServiceDescription -> Authorize / LinkedInAuthenticationServiceDescription -> Authenticate
+     - Optional force authentication for ScopedPermissions
 		- Fixed broken package
 		
 		0.2 - Contains Significant Breaking Changes From LinkedInToolKit
