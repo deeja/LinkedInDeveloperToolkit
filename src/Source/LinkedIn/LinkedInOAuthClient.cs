@@ -9,6 +9,8 @@ using System.Text;
 using DotNetOpenAuth.AspNet;
 using DotNetOpenAuth.AspNet.Clients;
 using DotNetOpenAuth.Messaging;
+using DotNetOpenAuth.OAuth;
+using DotNetOpenAuth.OAuth.ChannelElements;
 using DotNetOpenAuth.OAuth.Messages;
 using LinkedIn.FieldSelectorConverters;
 using LinkedIn.Properties;
@@ -26,6 +28,26 @@ namespace LinkedIn
         private readonly IAccessTokenStorage _accessTokenStorage;
 
         private readonly IDictionary<string, ProfileField> _extraAuthDataFields = new Dictionary<string, ProfileField>(StringComparer.OrdinalIgnoreCase);
+
+        /// <summary>
+        /// Simple creation of a fully cookie based implementation of the LinkedInOAuth client
+        /// </summary>
+        /// <param name="consumerKey">LinkedIn API key</param>
+        /// <param name="consumerSecret">LinkedIn API secret</param>
+        /// <param name="serviceDescription">Optional Service description; defaults to <see cref="ServiceDescriptions.LinkedInServiceDescription"/></param>
+        /// <returns></returns>
+        public static LinkedInOAuthClient CreateAsCookieBasedClient(string consumerKey, string consumerSecret, ServiceProviderDescription serviceDescription = null)
+        {
+            if (serviceDescription == null)
+            {
+                serviceDescription = ServiceDescriptions.LinkedInServiceDescription;
+            }
+            IAccessTokenStorage tokenStorage = new CookieAccessTokenStorage(consumerSecret);
+            IOAuthTokenManager cookieOAuthTokenManager = new CookieOAuthTokenManager();
+            IConsumerTokenManager tokenManager = new SimpleConsumerTokenManager(consumerKey, consumerSecret, cookieOAuthTokenManager);
+            IOAuthWebWorker webWorker = new DotNetOpenAuthWebConsumer(serviceDescription, tokenManager);
+            return new LinkedInOAuthClient(tokenStorage, webWorker);
+        }
 
         public LinkedInOAuthClient(IAccessTokenStorage accessTokenStorage, IOAuthWebWorker webWorker
             )
