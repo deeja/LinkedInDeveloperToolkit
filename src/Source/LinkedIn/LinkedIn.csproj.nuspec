@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>LinkedInOAuthApi</id>
-        <version>0.3.1-pre</version>
+        <version>0.3.2-pre</version>
         <title>LinkedIn OAuth API for ASP.Net</title> 
 		<description>Specifically for ASP.Net using the DotNetOpenAuth framework. 
 		IoC friendly using ILinkedInService interface. 
