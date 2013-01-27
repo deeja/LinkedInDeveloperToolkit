@@ -36,7 +36,7 @@ namespace LinkedIn
         /// <param name="consumerSecret">LinkedIn API secret</param>
         /// <param name="serviceDescription">Optional Service description; defaults to <see cref="ServiceDescriptions.LinkedInServiceDescription"/></param>
         /// <returns></returns>
-        public static LinkedInOAuthClient CreateAsCookieBasedClient(string consumerKey, string consumerSecret, ServiceProviderDescription serviceDescription = null)
+        public static LinkedInOAuthClient CreateCookieBasedClient(string consumerKey, string consumerSecret, ServiceProviderDescription serviceDescription = null)
         {
             if (serviceDescription == null)
             {

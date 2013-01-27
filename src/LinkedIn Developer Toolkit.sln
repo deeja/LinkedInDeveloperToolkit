@@ -24,9 +24,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcSample", "MvcSample\MvcSample.csproj", "{D5266644-C066-483F-8E06-9B296114E656}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3B07DBB2-6FB0-4C72-9B86-9088806C8F88}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionExamples", "Samples\FunctionExamples\FunctionExamples.csproj", "{3844C22F-E4A5-4E73-AE17-50F33CF5DB0E}"
 EndProject
