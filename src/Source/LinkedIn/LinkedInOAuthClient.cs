@@ -34,13 +34,13 @@ namespace LinkedIn
         /// </summary>
         /// <param name="consumerKey">LinkedIn API key</param>
         /// <param name="consumerSecret">LinkedIn API secret</param>
-        /// <param name="serviceDescription">Optional Service description; defaults to <see cref="ServiceDescriptions.LinkedInServiceDescription"/></param>
+        /// <param name="serviceDescription">Optional Service description; defaults to <see cref="ServiceDescriptions.Authenticate"/></param>
         /// <returns></returns>
         public static LinkedInOAuthClient CreateCookieBasedClient(string consumerKey, string consumerSecret, ServiceProviderDescription serviceDescription = null)
         {
             if (serviceDescription == null)
             {
-                serviceDescription = ServiceDescriptions.LinkedInServiceDescription;
+                serviceDescription = ServiceDescriptions.Authenticate;
             }
             IAccessTokenStorage tokenStorage = new CookieAccessTokenStorage(consumerSecret);
             IOAuthTokenManager cookieOAuthTokenManager = new CookieOAuthTokenManager();
