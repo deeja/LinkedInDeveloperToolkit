@@ -13,7 +13,8 @@ using System.Xml.Serialization;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -21,7 +22,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for AttributionTest and is intended
   /// to contain all AttributionTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class AttributionTest
   {
     private readonly string attributionRequestFormat = @"<attribution><share><id>{0}</id></share></attribution>";
@@ -49,7 +50,7 @@ namespace LinkedIn.ServiceEntities.Tests
         Constants.Share_One_Id);
     }
 
-    [TestMethod()]
+    [Test]
     public void WriteXmlTest()
     {
       Attribution target = new Attribution

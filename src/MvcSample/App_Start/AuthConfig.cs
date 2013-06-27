@@ -15,7 +15,7 @@ namespace MvcSample
             string consumerSecret = ConfigurationManager.AppSettings["LinkedInConsumerSecret"];
 
             LinkedInOAuthClient linkedInOAuthClient = new LinkedInOAuthClient(new CookieAccessTokenStorage(consumerSecret),
-                new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
+                new DotNetOpenAuthWebConsumer(ServiceDescriptions.Authenticate,
                     new InMemoryOAuthTokenManager(consumerKey, consumerSecret)));
 
             ShouldReallyBeAnIocContainerAndDontUseServiceLocators.LinkedInService = linkedInOAuthClient;

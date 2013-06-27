@@ -14,7 +14,8 @@ using System.Xml.Serialization;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -22,7 +23,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for UpdateCommentTest and is intended
   /// to contain all UpdateCommentTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class UpdateCommentTest
   {
     private readonly string shareContentResponseFormat = @"<update-comment>
@@ -86,7 +87,7 @@ namespace LinkedIn.ServiceEntities.Tests
         Constants.UpdateComment_One_Comment);
     }
 
-    [TestMethod()]
+    [Test]
     public void ReadXmlTest()
     {
       UpdateComment target = new UpdateComment();
@@ -123,7 +124,7 @@ namespace LinkedIn.ServiceEntities.Tests
       Assert.AreEqual(expected.Person.Id, target.Person.Id);
     }
 
-    [TestMethod()]
+    [Test]
     public void WriteXmlTest()
     {
       UpdateComment target = new UpdateComment

@@ -19,7 +19,7 @@ namespace FunctionalTests
         [Obsolete("Because this style of thinking is a terrible idea")]
         public static LinkedInOAuthClient GetLinkedInService()
         {
-            return new LinkedInOAuthClient(new CookieAccessTokenStorage(ConsumerSecret), new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,new InMemoryOAuthTokenManager(ConsumerKey, ConsumerSecret)));
+            return new LinkedInOAuthClient(new CookieAccessTokenStorage(ConsumerSecret), new DotNetOpenAuthWebConsumer(ServiceDescriptions.Authorize,new InMemoryOAuthTokenManager(ConsumerKey, ConsumerSecret)));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Classes
         public static ILinkedInService GetLinkedInService()
         {
             return new LinkedInOAuthClient(new CookieAccessTokenStorage(ConsumerSecret),
-                                           new DotNetOpenAuthWebConsumer(ServiceDescriptions.LinkedInServiceDescription,
+                                           new DotNetOpenAuthWebConsumer(ServiceDescriptions.Authorize,
                                                                          new InMemoryOAuthTokenManager(ConsumerKey,
                                                                                                        ConsumerSecret)));
         }

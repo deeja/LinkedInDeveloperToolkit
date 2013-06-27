@@ -11,7 +11,8 @@ using System.Xml.Schema;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -19,7 +20,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for CompanyTest and is intended
   /// to contain all CompanyTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class CompanyTest
   {
     private readonly string companyRequestFormat = @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><company><id>{0}</id><name>{1}</name><company-type><code>{2}</code><name>{3}</name></company-type></company>";
@@ -52,7 +53,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for Deserialization.
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void DeserializeTest()
     {
       CompanyType companyType = new CompanyType

@@ -11,7 +11,8 @@ using System.Xml.Schema;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -19,7 +20,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for NetworkTest and is intended
   /// to contain all NetworkTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class NetworkTest
   {
     private readonly string networkRequestFormat = @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><network><network-stats total=""2""><property key=""degree-1-count"">{0}</property><property key=""degree-2-count"">{1}</property></network-stats><updates total=""{2}"" start=""1"" count=""{2}"">{3}{4}{5}</updates></network>";
@@ -54,7 +55,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for Deserialization.
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void DeserializeTest()
     {
       Collection<NetworkStatsProperty> networkStats = new Collection<NetworkStatsProperty>();

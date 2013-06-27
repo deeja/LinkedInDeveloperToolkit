@@ -13,8 +13,9 @@ using System.Xml.Serialization;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 using LinkedIn.Utility;
+using NUnit.Framework;
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -22,7 +23,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for ShareTest and is intended
   /// to contain all ShareTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class ShareTest
   {
     private readonly string shareResponseFormat = @"<current-share>
@@ -101,7 +102,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for ReadXml
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void ReadXmlTest()
     {
       Share target = new Share();
@@ -155,7 +156,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for WriteXml
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void WriteXmlTest()
     {
       Share target = new Share

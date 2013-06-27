@@ -11,7 +11,8 @@ using System.Xml.Schema;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -19,7 +20,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for JobTest and is intended
   /// to contain all JobTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class JobTest
   {
     private readonly string jobRequestFormat = @"<job><id>{0}</id><position><title>{1}</title></position><company><name>{2}</name></company></job>";
@@ -51,7 +52,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for Deserialization.
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void DeserializeTest()
     {
       Position position = new Position

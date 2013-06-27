@@ -13,7 +13,8 @@ using System.Xml.Serialization;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -21,7 +22,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for ActivityTest and is intended
   /// to contain all ActivityTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class ActivityTest
   {
     private readonly string activityResponseFormat = @"<activity>
@@ -57,7 +58,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for ReadXml
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void ReadXmlTest()
     {
       Activity target = new Activity();
@@ -77,7 +78,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for WriteXml
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void WriteXmlTest()
     {
       Activity target = new Activity

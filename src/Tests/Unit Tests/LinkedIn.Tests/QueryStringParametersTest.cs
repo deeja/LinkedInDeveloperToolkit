@@ -10,7 +10,8 @@
 
 using System;
 using LinkedIn;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.Tests
 {  
@@ -18,7 +19,7 @@ namespace LinkedIn.Tests
   /// This is a test class for QueryStringParametersTest and is intended
   /// to contain all QueryStringParametersTest Unit Tests
   ///</summary>
-  [TestClass()]
+  [TestFixture]
   public class QueryStringParametersTest
   {
     private TestContext testContextInstance;
@@ -72,8 +73,8 @@ namespace LinkedIn.Tests
     /// <summary>
     /// A test for adding a string parameter value.
     ///</summary>
-    [TestMethod()]
-    [DeploymentItem("LinkedIn.dll")]
+    [Test]
+    
     public void Add_String_Test()
     {
       QueryStringParameters target = new QueryStringParameters();
@@ -87,8 +88,8 @@ namespace LinkedIn.Tests
     /// <summary>
     /// A test for adding a invalid string parameter value.
     ///</summary>
-    [TestMethod()]
-    [DeploymentItem("LinkedIn.dll")]
+    [Test]
+    
     public void Add_InvalidString_Test()
     {
       QueryStringParameters target = new QueryStringParameters();
@@ -102,8 +103,8 @@ namespace LinkedIn.Tests
     /// <summary>
     /// A test for adding a boolean parameter value.
     ///</summary>
-    [TestMethod()]
-    [DeploymentItem("LinkedIn.dll")]
+    [Test]
+    
     public void Add_Boolean_Test()
     {
       QueryStringParameters target = new QueryStringParameters();
@@ -117,8 +118,8 @@ namespace LinkedIn.Tests
     /// <summary>
     /// A test for adding a integer parameter value.
     ///</summary>
-    [TestMethod()]
-    [DeploymentItem("LinkedIn.dll")]
+    [Test]
+    
     public void Add_Int_Test()
     {
       QueryStringParameters target = new QueryStringParameters();
@@ -132,8 +133,8 @@ namespace LinkedIn.Tests
     /// <summary>
     /// A test for adding a invalid integer parameter value.
     ///</summary>
-    [TestMethod()]
-    [DeploymentItem("LinkedIn.dll")]
+    [Test]
+    
     public void Add_InvalidInt_Test()
     {
       QueryStringParameters target = new QueryStringParameters();
@@ -147,12 +148,12 @@ namespace LinkedIn.Tests
     /// <summary>
     /// A test for AppendToUri
     ///</summary>
-    [TestMethod()]
-    [DeploymentItem("LinkedIn.dll")]
+    [Test]
+    
     public void AppendToUriTest()
     {
-      QueryStringParameters_Accessor target = new QueryStringParameters_Accessor();
-      UriBuilder location = new UriBuilder(Constants.ApiBaseUrl);
+        throw new NotImplementedException();
+      /*UriBuilder location = new UriBuilder(Constants.ApiBaseUrl);
       target.Add(Constants.QueryStringParam1, Constants.QueryStringValue1);
       target.Add(Constants.QueryStringParam1, Constants.QueryStringValue2);
 
@@ -164,7 +165,7 @@ namespace LinkedIn.Tests
         Constants.QueryStringValue2);
 
       UriBuilder actual = target.AppendToUri(location);
-      Assert.AreEqual(expected, actual);
+      Assert.AreEqual(expected, actual);*/
     }
   }
 }

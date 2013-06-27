@@ -11,7 +11,8 @@ using System.Xml.Schema;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -19,7 +20,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for ConnectionsTest and is intended
   /// to contain all ConnectionsTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class ConnectionsTest
   {
     private readonly string connectionsRequestFormat = @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><connections total=""2"">{0}{1}</connections>";
@@ -50,7 +51,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for Deserialization.
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void DeserializeTest()
     {
       Collection<Person> connectionItems = new Collection<Person>();

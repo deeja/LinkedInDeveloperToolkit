@@ -11,7 +11,8 @@ using System.Xml.Schema;
 
 using LinkedIn.ServiceEntities;
 using LinkedIn.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+
 
 namespace LinkedIn.ServiceEntities.Tests
 {
@@ -19,7 +20,7 @@ namespace LinkedIn.ServiceEntities.Tests
   /// This is a test class for ApiRequestTest and is intended
   /// to contain all ApiRequestTest Unit Tests
   /// </summary>
-  [TestClass()]
+  [TestFixture]
   public class ApiRequestTest
   {
     private readonly string apiRequestRequestFormat = @"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?><api-standard-profile-request><url>{0}</url><headers total=""1""><http-header><name>{1}</name><value>{2}</value></http-header></headers></api-standard-profile-request>";
@@ -51,7 +52,7 @@ namespace LinkedIn.ServiceEntities.Tests
     /// <summary>
     /// A test for Deserialization.
     /// </summary>
-    [TestMethod()]
+    [Test]
     public void DeserializeTest()
     {
       ApiRequest expected = EntitiesConstants.ApiRequest_One;
