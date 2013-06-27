@@ -1,11 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="LinkedInBasePage.cs" company="Beemway">
-//     Copyright (c) Beemway. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-
-using System;
-using DotNetOpenAuth.AspNet;
+﻿using System;
 using LinkedIn;
 using Microsoft.AspNet.Membership.OpenAuth;
 
@@ -20,6 +13,7 @@ namespace FunctionalTests
         {
             if (!User.Identity.IsAuthenticated)
             {
+
                 OpenAuth.RequestAuthentication(ServiceLookup.ProviderName, "/");
             }
             //if (User.Identity.IsAuthenticated)

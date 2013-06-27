@@ -43,7 +43,7 @@ namespace LinkedIn
                 serviceDescription = ServiceDescriptions.Authenticate;
             }
             IAccessTokenStorage tokenStorage = new CookieAccessTokenStorage(consumerSecret);
-            IOAuthTokenManager cookieOAuthTokenManager = new CookieOAuthTokenManager();
+            IOAuthTokenManager cookieOAuthTokenManager = new AuthenticationOnlyCookieOAuthTokenManager();
             IConsumerTokenManager tokenManager = new SimpleConsumerTokenManager(consumerKey, consumerSecret, cookieOAuthTokenManager);
             IOAuthWebWorker webWorker = new DotNetOpenAuthWebConsumer(serviceDescription, tokenManager);
             return new LinkedInOAuthClient(tokenStorage, webWorker);

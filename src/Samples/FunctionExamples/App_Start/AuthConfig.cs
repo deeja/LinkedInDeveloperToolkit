@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.Membership.OpenAuth;
+﻿using Microsoft.AspNet.Membership.OpenAuth;
 
 namespace FunctionalTests.App_Start
 {
@@ -10,7 +6,7 @@ namespace FunctionalTests.App_Start
     {
         public static void RegisterOpenAuth()
         {
-     OpenAuth.AuthenticationClients.Add("Linked In", () => ServiceLookup.GetLinkedInService());
+            OpenAuth.AuthenticationClients.Add("Linked In", () => ServiceLookup.GetLinkedInService());
         }
     }
 }
