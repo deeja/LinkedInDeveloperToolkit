@@ -1,63 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-    <metadata>
-        <id>LinkedInOAuthApi</id>
-        <version>0.3.3-pre</version>
-        <title>LinkedIn OAuth API for ASP.Net</title> 
+	<metadata>
+		<id>LinkedInOAuthApi</id>
+		<version>0.3.4-pre</version>
+		<title>LinkedIn OAuth API for ASP.Net</title> 
 		<description>Specifically for ASP.Net using the DotNetOpenAuth framework. 
 		IoC friendly using ILinkedInService interface. 
-		
+
 		LinkedInOAuthClient linkedInOAuthClient = new LinkedInOAuthClient(...);
 				OR 
 		LinkedInOAuthClient linkedInOAuthClient = LinkedInOAuthClient.CreateCookieBasedClient(...)
 
 			THEN
 		OAuthWebSecurity.RegisterClient((IAuthenticationClient)linkedInOAuthClient, "LinkedIn", null);
-		
+
 		... after login ...
-		
+
 		Person me = client.GetCurrentUser();
 		var id = me.PersonId;		
-		
+
 		Samples: https://github.com/deeja/LinkedInDeveloperToolkit			
-</description>
-        <authors>Deeja</authors>
-        <owners>Deeja</owners>
-        <licenseUrl>https://raw.github.com/deeja/LinkedInDeveloperToolkit/master/License.txt</licenseUrl>
-        <projectUrl>https://github.com/deeja/LinkedInDeveloperToolkit</projectUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <summary>LinkedIn API toolkit for ASP.Net using OAuth via the DotNetAuth libraries</summary>
-        <releaseNotes>
+		</description>
+		<authors>Deeja</authors>
+		<owners>Deeja</owners>
+		<licenseUrl>https://raw.github.com/deeja/LinkedInDeveloperToolkit/master/License.txt</licenseUrl>
+		<projectUrl>https://github.com/deeja/LinkedInDeveloperToolkit</projectUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<summary>LinkedIn API toolkit for ASP.Net using OAuth via the DotNetAuth libraries</summary>
+		<releaseNotes>
+		0.4 - General update / clean up. 		
 		0.3 - Updates to the DotNetOpenAuth.AspNet Version
 		 - Added static method: LinkedInOAuthClient.CreateCookieBasedClient(key,secret,service description)
 		 - Changed the ServiceDescriptions to useful names, removing a bit of redundant code
 		 - LinkedInServiceDescription -> Authorize / LinkedInAuthenticationServiceDescription -> Authenticate
      - Optional force authentication for ScopedPermissions
 		- Fixed broken package
-		
+
 		0.2 - Contains Significant Breaking Changes From LinkedInToolKit
 		- Scoped Permissions (thanks paulirwin)
 		- Added an interface: ILinkedInService
 		- Added an Asp.Net OAuthClient / IAuthenticationClient LinkedInOAuthClient that implements ILinkedInService
 		- Removed two obsolete Methods (DeleteStatus and UpdateStatus)	
 		- Removed Desktop references 
-		
+
 		Originally From the LinkedInToolKit 1.0.0.0 
 
 This project has been uploaded to GitHub.
 Any Issues, report them to https://github.com/deeja/LinkedInDeveloperToolkit</releaseNotes>
-        <copyright />
-        <tags>LinkedIn, API, ASP.Net, OAuth, DotNetOpenAuth</tags>
+<copyright />
+<tags>LinkedIn, API, ASP.Net, OAuth, DotNetOpenAuth</tags>
 
-        <dependencies>
-            <dependency id="DotNetOpenAuth.AspNet" version="4.2.1.13026" />
-            <dependency id="DotNetOpenAuth.Core" version="4.2.1.13026" />
-            <dependency id="DotNetOpenAuth.OAuth.Consumer" version="4.2.1.13026" />
-            <dependency id="DotNetOpenAuth.OAuth.Core" version="4.2.1.13026" />
-        </dependencies>
-    </metadata>		
-	<files>
-		<file src="bin\Debug\LinkedIn.pdb" target="lib\net40" />
-		<file src="bin\Debug\LinkedIn.dll" target="lib\net40" />
-		</files>
+<dependencies>
+	<dependency id="DotNetOpenAuth.AspNet" version="4.1.2.12274"  />
+	<dependency id="DotNetOpenAuth.Core" version="4.1.2.12274"  />
+	<dependency id="DotNetOpenAuth.OAuth.Consumer" version="4.1.2.12274"  />
+	<dependency id="DotNetOpenAuth.OAuth.Core" version="4.1.2.12274"  />
+</dependencies>
+</metadata>		
+<files>
+	<file src="bin\Debug\LinkedIn.pdb" target="lib\net40" />
+	<file src="bin\Debug\LinkedIn.dll" target="lib\net40" />
+</files>
 </package>
